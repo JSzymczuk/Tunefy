@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tunefy_cms',
+    'django_user_agents'
 ]
 
 MIDDLEWARE = [

@@ -5,7 +5,15 @@
     <title>Title</title>
 </head>
 <body>
+
+    {{ browser }}
+
     <ul>
+    {% for genre in genres %}
+
+        <li>{{ genre.name }}</li>
+
+    {% endfor %}
     </ul>
 
 </body>

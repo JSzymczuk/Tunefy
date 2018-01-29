@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-from mongoengine import connect
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,9 +26,7 @@ SECRET_KEY = 's7eoq=cqm4f5g%w&8$a8rc)^$vbt%7a14-mhqkrod$r+tuc0v5'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'jszymczuk.pythonanywhere.com',
-    'localhost',
-    '127.0.0.1'
+    'jszymczuk.pythonanywhere.com'
 ]
 
 
@@ -43,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tunefy_cms',
-    'mongoengine',
     'django_user_agents'
 ]
 
@@ -82,22 +78,13 @@ WSGI_APPLICATION = 'tunefy.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
 DATABASES = {
-   'default' : {
-      'ENGINE' : 'django.db.backends.dummy',
-      'NAME' : 'testdb'
-   }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
-AUTHENTICATION_BACKENDS = (
-    'mongoengine.django.auth.MongoEngineBackend',
-)
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

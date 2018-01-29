@@ -7,5 +7,7 @@ urlpatterns = [
     # path('articles/<int:year>/', views.year_archive),
     # path('articles/<int:year>/<int:month>/', views.month_archive),
     # path('articles/<int:year>/<int:month>/<slug:slug>/', views.article_detail),
+    path('test/', views.test),
+    path('test/<int:number>/<str:name>/', views.insert),
     path('', views.index)
 ]

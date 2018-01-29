@@ -1,4 +1,5 @@
 from django.db import models
+from mongoengine import Document, StringField, IntField
 
 
 class Artist(models.Model):
@@ -52,3 +53,9 @@ class Genre(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Test(Document):
+    meta = {'collection': 'testdoc'}
+    name = StringField(max_length=50)
+    number = IntField()

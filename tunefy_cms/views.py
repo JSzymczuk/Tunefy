@@ -9,7 +9,7 @@ def db_connect():
     connect(
         db='Tunefy',
         username='JSzymczuk',
-        password='L%40jkonik77',
+        password='L@jkonik77',
         host='mongodb://JSzymczuk:L%40jkonik77@tunefy-shard-00-00-tf0rd.mongodb.net:27017,tunefy-shard-00-01-tf0rd.mongodb.net:27017,tunefy-shard-00-02-tf0rd.mongodb.net:27017/test?ssl=true&replicaSet=Tunefy-shard-0&authSource=admin'
     )
 

@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block page_headline %}
+    <h2>{% block title %}Edytuj wykonawcę{% endblock %}</h2>
+{% endblock %}
+
+
+{% block content %}
+
+    <form action="{% url 'artist.edit' artist_id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        {% include "form_field_set.html" with form=form %}
+
+        <input type="submit" value="Zapisz zmiany" />
+        <a href="{% url 'artist.index' %}">Anuluj</a>
+    </form>
+
+{% endblock %}

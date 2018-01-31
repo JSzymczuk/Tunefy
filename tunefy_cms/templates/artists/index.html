@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block page_headline %}
+    <h2>{% block title %}Wykonawcy{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+
+    <a href="{% url 'artist.create' %}">Dodaj nowego wykonawcę</a>
+
+    {% if artists %}
+
+        <table>
+            {% for artist in artists %}
+
+                <tr>
+                    <td>{{ artist.id }}</td>
+                    <td>{{ artist.name }}</td>
+                    <td>
+                        {% if artist.image %}
+                            <a href="{{ artist.image.url }}">
+                                <img src="{{ artist.thumb.url }}" alt="{{ artist.name }}">
+                            </a>
+                        {% endif %}
+                    </td>
+                    <td><a href="{% url 'artist.edit' artist.id %}">Edytuj</a></td>
+                    <td><a href="{% url 'artist.delete' artist.id %}">Usuń</a></td>
+                </tr>
+
+                <!--
+                <audio controls>
+                    {% load static %}
+                    <source src="{% static 'songs/test.mp3' %}" type="audio/mpeg">
+                    Ta przeglądarka nie obsługuje formatu audio.
+                </audio>
+                -->
+
+            {% endfor %}
+        </table>
+
+    {% else %}
+
+        <h2>Brak wykonawców.</h2>
+
+    {% endif %}
+
+{% endblock %}

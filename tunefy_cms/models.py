@@ -1,8 +1,14 @@
-from django.db import models
+
+from django.db.models import Model, CharField, ForeignKey, IntegerField, CASCADE, ManyToManyField, PositiveSmallIntegerField, ImageField
+from tunefy_cms.file_manager import create_thumb, path_and_rename, wrapper
 
 
-class Artist(models.Model):
-    name = models.CharField(max_length=48)
+class Artist(Model):
+    name = CharField(max_length=50)
+    #image = ImageField(upload_to=wrapper, blank=True)
+    #thumb = ImageField(upload_to=wrapper, null=True, blank=True)
+    image = ImageField(upload_to=path_and_rename('artists'), blank=True)
+    thumb = ImageField(upload_to=path_and_rename('artists/thumbs'), null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -10,14 +16,21 @@ class Artist(models.Model):
     class Meta:
         ordering = ('name',)
 
+    def save(self, *args, **kwargs):
+        create_thumb(self)
+        super(Artist, self).save(*args, **kwargs)
 
-class Album(models.Model):
-    name = models.CharField(max_length=64)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
-    year = models.IntegerField()
+
+
+
+
+class Album(Model):
+    name = CharField(max_length=64)
+    artist = ForeignKey(Artist, on_delete=CASCADE)
+    year = IntegerField()
     # cover = models.FilePathField()
     # cover_thumb = models.FilePathField()
-    genres = models.ManyToManyField('Genre')
+    genres = ManyToManyField('Genre')
 
     def __str__(self):
         return '[{}]{} - {}'.format(self.year, self.artist, self.name)
@@ -26,10 +39,10 @@ class Album(models.Model):
         ordering = ('year',)
 
 
-class Track(models.Model):
-    order = models.PositiveSmallIntegerField()
-    song = models.ForeignKey('Song', on_delete=models.CASCADE)
-    album = models.ForeignKey('Album', on_delete=models.CASCADE)
+class Track(Model):
+    order = PositiveSmallIntegerField()
+    song = ForeignKey('Song', on_delete=CASCADE)
+    album = ForeignKey('Album', on_delete=CASCADE)
 
     def __str__(self):
         return '{}. {}'.format(self.order, self.song)
@@ -38,17 +51,17 @@ class Track(models.Model):
         ordering = ('order',)
 
 
-class Song(models.Model):
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
-    title = models.CharField(max_length=64)
+class Song(Model):
+    artist = ForeignKey(Artist, on_delete=CASCADE)
+    title = CharField(max_length=64)
 
     def __str__(self):
         return self.title
 
 
-class Genre(models.Model):
-    name = models.CharField(max_length=32)
-    albums = models.ManyToManyField('Album', blank=True)
+class Genre(Model):
+    name = CharField(max_length=32)
+    albums = ManyToManyField('Album', blank=True)
 
     def __str__(self):
         return self.name

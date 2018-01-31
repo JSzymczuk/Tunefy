@@ -26,7 +26,9 @@ SECRET_KEY = 's7eoq=cqm4f5g%w&8$a8rc)^$vbt%7a14-mhqkrod$r+tuc0v5'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'jszymczuk.pythonanywhere.com'
+    'jszymczuk.pythonanywhere.com',
+    '127.0.0.1',
+    'localhost'
 ]
 
 
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tunefy_cms',
+    'django_thumbs',
     'django_user_agents'
 ]
 
@@ -58,7 +61,7 @@ ROOT_URLCONF = 'tunefy.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
+        'DIRS': [os.path.join(BASE_DIR, 'tunefy_cms/templates')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -122,4 +125,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'upload/')
+MEDIA_URL = '/upload/'
 STATIC_URL = '/static/'

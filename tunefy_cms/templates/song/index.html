@@ -1,0 +1,37 @@
+{% extends 'layout.html' %}
+
+{% block page_headline %}
+    <h2>{% block title %}Utwory{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+
+    <a href="{% url 'song.create' %}">Dodaj nowy utwór</a>
+
+    {% if songs %}
+
+        <table>
+            {% for song in songs %}
+                <tr>
+                    <td>{{ song.id }}</td>
+                    <td><a href="{% url 'artist.edit' song.artist.id %}">{{ song.artist }}</a></td>
+                    <td>{{ song.title }}</td>
+                    <td>
+                        {% for artist in song.all_artists.all %}
+                            {% if forloop.counter > 1 %}, {% endif %}
+                            <a href="{% url 'artist.edit' artist.id %}">{{ artist }}</a>
+                        {% endfor %}
+                    </td>
+                    <td><a href="{% url 'song.edit' song.id %}">Edytuj</a></td>
+                    <td><a href="{% url 'song.delete' song.id %}">Usuń</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+
+    {% else %}
+
+        <h2>Brak utworów.</h2>
+
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'layout.html' %}
+
+{% block page_headline %}
+    <h2>{% block title %}{{ title }}{% endblock %}</h2>
+{% endblock %}
+
+
+{% block content %}
+
+    <form action="
+            {% if id %}
+                {% url form_confirm_action id %}
+            {% else %}
+                {% url form_confirm_action %}
+            {% endif %}"
+          method="post"
+          enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        {% include "form_field_set.html" with form=form %}
+
+        <input type="submit" value="{{ form_confirm_text }}" />
+        <a href="{% url form_cancel_action %}">{{ form_cancel_text }}</a>
+    </form>
+
+{% endblock %}

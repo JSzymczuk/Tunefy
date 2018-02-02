@@ -7,7 +7,7 @@ from tunefy_cms.models import Artist
 
 
 def index(request):
-    return render(request, 'artists/index.html', {
+    return render(request, 'artist/index.html', {
         'artists': Artist.objects.all()
     })
 
@@ -20,7 +20,7 @@ def create(request):
             return redirect('artist.index')
     else:
         form = CreateArtistForm()
-    return render(request, 'artists/create.html', {
+    return render(request, 'artist/create.html', {
         'form': form
     })
 
@@ -40,7 +40,7 @@ def edit(request, id):
             return redirect('artist.index')
     else:
         form = CreateArtistForm(instance = artist)
-    return render(request, 'artists/edit.html', {
+    return render(request, 'artist/edit.html', {
         'form': form,
         'artist_id': id
     })

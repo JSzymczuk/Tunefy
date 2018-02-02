@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block page_headline %}
+    <h2>{% block title %}Gatunki{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+
+    <a href="{% url 'genre.create' %}">Dodaj nowey gatunek</a>
+
+    {% if genres %}
+        <table>
+            {% for genre in genres %}
+                <tr>
+                    <td>{{ genre.id }}</td>
+                    <td>{{ genre.name }}</td>
+                    <td><a href="{% url 'genre.edit' genre.id %}">Edytuj</a></td>
+                    <td><a href="{% url 'genre.delete' genre.id %}">Usuń</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <h2>Brak wykonawców.</h2>
+    {% endif %}
+
+{% endblock %}

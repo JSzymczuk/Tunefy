@@ -8,13 +8,15 @@
 
     <a href="{% url 'artist.create' %}">Dodaj nowego wykonawcę</a>
 
-    {% if artists %}
+    {% if results %}
+
+        {% include 'pagination.html' with url_action='artist.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
 
         <table>
-            {% for artist in artists %}
+            {% for artist in results %}
 
                 <tr>
-                    <td>{{ artist.id }}</td>
+                    <td>{{ first_index|add:forloop.counter }}</td>
                     <td>{{ artist.name }}</td>
                     <td>
                         {% if artist.image %}
@@ -29,6 +31,8 @@
 
             {% endfor %}
         </table>
+
+        {% include 'pagination.html' with url_action='artist.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
 
     {% else %}
 

@@ -1,6 +1,7 @@
-from django.db.models import Model, CharField, ForeignKey, IntegerField, CASCADE, ManyToManyField, PositiveSmallIntegerField, ImageField, FileField
-
+from django.db.models import Model, CharField, ForeignKey, IntegerField, CASCADE, ManyToManyField, \
+    PositiveSmallIntegerField, ImageField, FileField, DateField
 from tunefy_cms.file_manager import create_thumb, path_and_rename, wrapper
+import datetime
 
 
 class Genre(Model):
@@ -13,10 +14,23 @@ class Genre(Model):
         ordering = ('name',)
 
 
-class Artist(Model):
+class ImageThumbModel(Model):
+    image = ImageField(blank=True)
+    thumb = ImageField(null=True, blank=True)
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+       create_thumb(self)
+       super(ImageThumbModel, self).save(*args, **kwargs)
+
+    def __init__(self, *args, **kwargs):
+        super(ImageThumbModel, self).__init__(*args, **kwargs)
+
+
+class Artist(ImageThumbModel):
     name = CharField(max_length=50)
-    #image = ImageField(upload_to=wrapper, blank=True)
-    #thumb = ImageField(upload_to=wrapper, null=True, blank=True)
     image = ImageField(upload_to=path_and_rename('artists'), blank=True)
     thumb = ImageField(upload_to=path_and_rename('artists/thumbs'), null=True, blank=True)
 
@@ -26,21 +40,17 @@ class Artist(Model):
     class Meta:
         ordering = ('name',)
 
-    def save(self, *args, **kwargs):
-        create_thumb(self)
-        super(Artist, self).save(*args, **kwargs)
-
 
 class Song(Model):
     title = CharField(max_length=64)
-    artist = ForeignKey(Artist, on_delete=CASCADE, related_name='artist+')
-    all_artists = ManyToManyField(Artist, blank=True, related_name='artists+')
+    #artist = ForeignKey(Artist, on_delete=CASCADE, related_name='artist+')
+    artists = ManyToManyField(Artist, blank=True, related_name='artists+')
     audio = FileField(upload_to=path_and_rename('songs'), blank=True)
     #audio = FileField(blank=True)
 
     def __str__(self):
-        artists = self.all_artists.exclude(id = self.artist_id).all()
-        return '%s - %s (feat. %s)' % (self.artist, self.title, ', '.join([str(a) for a in artists]))
+        all_artists = self.artists.all()
+        return '%s - %s' % (', '.join([str(a) for a in all_artists]), self.title)
 
 
 class Track(Model):
@@ -49,25 +59,25 @@ class Track(Model):
     album = ForeignKey('Album', on_delete=CASCADE)
 
     def __str__(self):
-        return '{}. {}'.format(self.order, self.song)
+        return '{} {}. {}'.format(self.song_id, self.order, self.song)
 
     class Meta:
-        ordering = ('order',)
+        ordering = ('album', 'order', 'song')
 
 
-class Album(Model):
+class Album(ImageThumbModel):
     name = CharField(max_length=64)
     artist = ForeignKey(Artist, on_delete=CASCADE)
-    year = IntegerField()
-    # cover = models.FilePathField()
-    # cover_thumb = models.FilePathField()
-    genres = ManyToManyField('Genre')
+    date_released = DateField('Date', default=datetime.date.today)
+    genres = ManyToManyField('Genre', blank=True, related_name='genres+')
+    image = ImageField(upload_to=path_and_rename('albums'), blank=True)
+    thumb = ImageField(upload_to=path_and_rename('albums/thumbs'), null=True, blank=True)
 
     def __str__(self):
-        return '[{}]{} - {}'.format(self.year, self.artist, self.name)
+        return '[{}]{} - {}'.format(self.date_released.year, self.artist, self.name)
 
     class Meta:
-        ordering = ('year',)
+        ordering = ('date_released',)
 
 
 

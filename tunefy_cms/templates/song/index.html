@@ -8,16 +8,17 @@
 
     <a href="{% url 'song.create' %}">Dodaj nowy utwór</a>
 
-    {% if songs %}
+    {% if results %}
+
+        {% include 'pagination.html' with url_action='song.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
 
         <table>
-            {% for song in songs %}
+            {% for song in results %}
                 <tr>
-                    <td>{{ song.id }}</td>
-                    <td><a href="{% url 'artist.edit' song.artist.id %}">{{ song.artist }}</a></td>
+                    <td>{{ first_index|add:forloop.counter }}</td>
                     <td>{{ song.title }}</td>
                     <td>
-                        {% for artist in song.all_artists.all %}
+                        {% for artist in song.artists.all %}
                             {% if forloop.counter > 1 %}, {% endif %}
                             <a href="{% url 'artist.edit' artist.id %}">{{ artist }}</a>
                         {% endfor %}
@@ -27,6 +28,8 @@
                 </tr>
             {% endfor %}
         </table>
+
+        {% include 'pagination.html' with url_action='song.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
 
     {% else %}
 

@@ -1,0 +1,74 @@
+{% include "album/create_edit_form_base.html" with form=form title='Dodaj album' form_confirm_action='album.create' form_cancel_action='album.index' form_confirm_text='Dodaj' form_cancel_text='Anuluj' %}
+
+
+{#{% extends 'layout.html' %}#}
+{##}
+{#{% block page_headline %}#}
+{#    <h2>{% block title %}Dodaj album{% endblock %}</h2>#}
+{#{% endblock %}#}
+{##}
+{##}
+{#{% block content %}#}
+{##}
+{#    <form action="{% url 'album.create' %}" method="post" enctype="multipart/form-data">#}
+{#        {% csrf_token %}#}
+{##}
+{#        {% include "form_field_set.html" with form=form %}#}
+{##}
+{##}
+{#        <select id="song-selection">#}
+{#            {% for song in songs %}#}
+{#                <option value="{{ song.id }}">{{ song }}</option>#}
+{#            {% endfor %}#}
+{#        </select>#}
+{#        <button id="add-song-button">Dodaj utwór</button>#}
+{##}
+{#        <h4>Lista utworów:</h4>#}
+{#        <ol id="song-list">#}
+{##}
+{#        </ol>#}
+{##}
+{#        <input type="submit" value="Dodaj" />#}
+{#        <a href="{% url 'album.index' %}">Anuluj</a>#}
+{#    </form>#}
+{##}
+{##}
+{#    <script>#}
+{#        $(document).ready(function(){#}
+{#            $('#add-song-button').on('click', function(e) {#}
+{#                e.preventDefault();#}
+{#                addSong();#}
+{#            });#}
+{#            $('#song-list').on('click', '.delete-button', function () {#}
+{#                $(this).closest('li').remove();#}
+{#            })#}
+{#            $('#song-list').on('click', '.move-up-button', function () {#}
+{#                var current = $(this).closest('li')[0];#}
+{#                var previous = current.previousSibling;#}
+{#                if (previous !== null) {#}
+{#                    previous.before(current);#}
+{#                }#}
+{#            })#}
+{#            $('#song-list').on('click', '.move-down-button', function () {#}
+{#                var current = $(this).closest('li')[0];#}
+{#                var previous = current.nextSibling;#}
+{#                if (previous !== null) {#}
+{#                    previous.after(current);#}
+{#                }#}
+{#            })#}
+{#        });#}
+{##}
+{#        function addSong() {#}
+{#            selection = $('#song-selection')[0];#}
+{#            $('#song-list').append('<li><input type="hidden" name="tracks" value="'#}
+{#                + selection.options[selection.options.selectedIndex].value#}
+{#                + '">'#}
+{#                + selection.options[selection.options.selectedIndex].text#}
+{#                + '<a class="delete-button">D</a>'#}
+{#                + '<a class="move-up-button">&lt;</a>'#}
+{#                + '<a class="move-down-button">&gt;</a>'#}
+{#                + '</li>');#}
+{#        }#}
+{#    </script>#}
+{##}
+{#{% endblock %}#}

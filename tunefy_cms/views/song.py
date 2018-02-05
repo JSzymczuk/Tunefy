@@ -4,12 +4,15 @@ from django.shortcuts import render, redirect
 from tunefy_cms.file_manager import remove_field_file, remove_file
 from tunefy_cms.forms import CreateSongForm
 from tunefy_cms.models import Song
+from tunefy_cms.views.search import get_paginated_context
 
 
-def index(request):
-    return render(request, 'song/index.html', {
-        'songs': Song.objects.all()
-    })
+default_page_size = 10
+
+
+def index(request, page_number=1, page_size=default_page_size):
+    context = get_paginated_context(Song.objects.all(), page_number, page_size)
+    return render(request, 'song/index.html', context)
 
 
 def create(request):

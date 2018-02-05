@@ -1,5 +1,5 @@
 from django.forms import ModelForm, ModelChoiceField
-from tunefy_cms.models import Artist, Song, Genre
+from tunefy_cms.models import Artist, Song, Genre, Album
 
 
 class GenreForm(ModelForm):
@@ -8,42 +8,40 @@ class GenreForm(ModelForm):
         fields = ['name']
 
 
-class CreateArtistForm(ModelForm):
-    class Meta:
-        model = Artist
-        fields = ['name', 'image']
-
+class ThumbModelForm(ModelForm):
     initial_thumb = None
 
     def __init__(self, *args, **kwargs):
-        super(CreateArtistForm, self).__init__(*args, **kwargs)
+        super(ThumbModelForm, self).__init__(*args, **kwargs)
         instance = getattr(self, 'instance')
         if instance:
             setattr(self, 'initial_thumb', getattr(instance, 'thumb'))
+
+
+class CreateArtistForm(ThumbModelForm):
+    class Meta:
+        model = Artist
+        fields = ['name', 'image']
 
 
 class CreateSongForm(ModelForm):
     class Meta:
         model = Song
-        fields = ['title', 'artist', 'all_artists', 'audio']
+        fields = ['title', 'artists', 'audio']
 
     def __init__(self, *args, **kwargs):
-    #     # user = kwargs.pop('user','')
          super(CreateSongForm, self).__init__(*args, **kwargs)
-         self.fields['artist'].empty_label = 'None'
-    #     self.fields['user_defined_code'] = ModelChoiceField(queryset = Artist.objects.all())
+         #self.fields['artist'].empty_label = 'None'
 
 
-class CreateAlbumForm(ModelForm):
+class CreateAlbumForm(ThumbModelForm):
     class Meta:
-        model = Artist
-        fields = ['name', 'image']
+        model = Album
+        fields = ['artist', 'name', 'date_released', 'genres', 'image']
 
-    initial_thumb = None
+    initial_tracks = []
 
-    def __init__(self, *args, **kwargs):
-        super(CreateArtistForm, self).__init__(*args, **kwargs)
-        instance = getattr(self, 'instance')
-        if instance:
-            setattr(self, 'initial_thumb', getattr(instance, 'thumb'))
+    def __init__(self, initial_tracks, *args, **kwargs):
+        super(CreateAlbumForm, self).__init__(*args, **kwargs)
+        self.initial_tracks = initial_tracks
 

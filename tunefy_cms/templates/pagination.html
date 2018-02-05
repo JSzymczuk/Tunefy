@@ -1,0 +1,19 @@
+<div class="pagination">
+    {% if prev_page %}
+        <span class="left align-left">
+            <a href="{% url url_action page_size 1 %}">&laquo; Pierwsza</a>
+            <a href="{% url url_action page_size prev_page %}">Poprzednia</a>
+        </span>
+    {% endif %}
+
+    <span class="current">
+        Strona {{ current_page }} z {{ total_pages }}
+    </span>
+
+    {% if next_page %}
+        <span class="right align-right">
+            <a href="{% url url_action page_size next_page %}">Następna</a>
+            <a href="{% url url_action page_size total_pages %}">Ostatnia &raquo;</a>
+        </span>
+    {% endif %}
+</div>

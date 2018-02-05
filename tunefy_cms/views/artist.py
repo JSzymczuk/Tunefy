@@ -1,15 +1,16 @@
-import os
-from django.conf import settings
 from django.shortcuts import render, redirect
-from tunefy_cms.file_manager import remove_field_file, remove_file
+from tunefy_cms.file_manager import remove_field_file, edit_image_thumb
 from tunefy_cms.forms import CreateArtistForm
 from tunefy_cms.models import Artist
+from tunefy_cms.views.search import get_paginated_context
 
 
-def index(request):
-    return render(request, 'artist/index.html', {
-        'artists': Artist.objects.all()
-    })
+default_page_size = 5
+
+
+def index(request, page_number=1, page_size=default_page_size):
+    context = get_paginated_context(Artist.objects.all(), page_number, page_size)
+    return render(request, 'artist/index.html', context)
 
 
 def create(request):
@@ -30,13 +31,8 @@ def edit(request, id):
     if request.method == 'POST':
         form = CreateArtistForm(request.POST, request.FILES, instance = artist)
         if form.is_valid():
-            if form.initial_thumb:
-                initial_thumb = form.initial_thumb.name
-                initial_image = form.initial['image'].name
+            edit_image_thumb(form)
             form.save()
-            if 'image' in form.changed_data:
-                 remove_file(os.path.join(settings.MEDIA_ROOT, initial_thumb))
-                 remove_file(os.path.join(settings.MEDIA_ROOT, initial_image))
             return redirect('artist.index')
     else:
         form = CreateArtistForm(instance = artist)

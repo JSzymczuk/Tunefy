@@ -1,12 +1,15 @@
 from django.shortcuts import render, redirect
 from tunefy_cms.forms import GenreForm
 from tunefy_cms.models import Genre
+from tunefy_cms.views.search import get_paginated_context
 
 
-def index(request):
-    return render(request, 'genre/index.html', {
-        'genres': Genre.objects.all()
-    })
+default_page_size = 10
+
+
+def index(request, page_number=1, page_size=default_page_size):
+    context = get_paginated_context(Genre.objects.all(), page_number, page_size)
+    return render(request, 'genre/index.html', context)
 
 
 def create(request):

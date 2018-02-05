@@ -4,6 +4,7 @@ from io import BytesIO
 from datetime import datetime
 from django.core.files.uploadedfile import SimpleUploadedFile
 
+from tunefy import settings
 
 THUMBNAIL_SIZE = (160, 160)
 
@@ -34,14 +35,23 @@ def create_thumb(obj):
     if not obj.image:
         return
 
-    DJANGO_TYPE = obj.image.file.content_type
+    # DJANGO_TYPE = obj.image.file.content_type
+    #
+    # if DJANGO_TYPE == 'image/jpeg':
+    #     PIL_TYPE = 'jpeg'
+    #     FILE_EXTENSION = 'jpg'
+    # elif DJANGO_TYPE == 'image/png':
+    #     PIL_TYPE = 'png'
+    #     FILE_EXTENSION = 'png'
 
-    if DJANGO_TYPE == 'image/jpeg':
+    if obj.image.name.lower().endswith(".jpg"):
         PIL_TYPE = 'jpeg'
         FILE_EXTENSION = 'jpg'
-    elif DJANGO_TYPE == 'image/png':
+        DJANGO_TYPE = 'image/jpeg'
+    elif obj.image.name.lower().endswith(".png"):
         PIL_TYPE = 'png'
         FILE_EXTENSION = 'png'
+        DJANGO_TYPE = 'image/png'
 
     image = ImageOps.fit(Image.open(BytesIO(obj.image.read())), THUMBNAIL_SIZE, Image.ANTIALIAS)
 
@@ -51,6 +61,15 @@ def create_thumb(obj):
 
     suf = SimpleUploadedFile(os.path.split(obj.image.name)[-1], temp_handle.read(), content_type=DJANGO_TYPE)
     obj.thumb.save(FILE_EXTENSION, suf, save=False)
+
+
+def edit_image_thumb(form):
+    if form.initial_thumb:
+        initial_thumb = form.initial_thumb.name
+        initial_image = form.initial['image'].name
+    if 'image' in form.changed_data:
+        remove_file(os.path.join(settings.MEDIA_ROOT, initial_thumb))
+        remove_file(os.path.join(settings.MEDIA_ROOT, initial_image))
 
 
 def file_save(file, path):

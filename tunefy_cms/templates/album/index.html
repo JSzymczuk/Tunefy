@@ -1,0 +1,59 @@
+{% extends 'layout.html' %}
+
+{% block page_headline %}
+    <h2>{% block title %}Albumy{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+
+    <a href="{% url 'album.create' %}">Dodaj nowy album</a>
+
+    {% if results %}
+
+        {% include 'pagination.html' with url_action='album.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
+
+        <table>
+            {% for album in results %}
+
+                <tr>
+                    <td>{{ first_index|add:forloop.counter }}</td>
+                    <td>{{ album.name }}</td>
+                    <td>
+                        {% if album.image %}
+                            <a href="{{ album.image.url }}">
+                                <img src="{{ album.thumb.url }}" alt="{{ album.name }}">
+                            </a>
+                        {% endif %}
+                    </td>
+                    <td><a href="{% url 'album.edit' album.id %}">Edytuj</a></td>
+                    <td><a href="{% url 'album.delete' album.id %}">Usuń</a></td>
+                </tr>
+
+            {% endfor %}
+        </table>
+
+        {% include 'pagination.html' with url_action='album.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
+
+    {% else %}
+
+        <h2>Brak albumów.</h2>
+
+    {% endif %}
+
+{#    {% if tracks %}#}
+{##}
+{#        <h4>Ścieżki</h4>#}
+{##}
+{#        <table>#}
+{#            {% for track in tracks %}#}
+{#                <tr>#}
+{#                    <td>{{ track.album.id }}</td>#}
+{#                    <td>{{ track.order }}</td>#}
+{#                    <td>{{ track.song }}</td>#}
+{#                </tr>#}
+{#            {% endfor %}#}
+{#        </table>#}
+{##}
+{#    {% endif %}#}
+
+{% endblock %}

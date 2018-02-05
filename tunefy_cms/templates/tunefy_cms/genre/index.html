@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'tunefy_cms/layout.html' %}
 
 {% block page_headline %}
     <h2>{% block title %}Gatunki{% endblock %}</h2>
@@ -10,7 +10,7 @@
 
     {% if results %}
 
-        {% include 'pagination.html' with url_action='genre.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
+        {% include 'tunefy_cms/pagination.html' with url_action='genre.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
 
         <table>
             {% for genre in results %}
@@ -23,7 +23,7 @@
             {% endfor %}
         </table>
 
-        {% include 'pagination.html' with url_action='genre.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
+        {% include 'tunefy_cms/pagination.html' with url_action='genre.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
 
     {% else %}
         <h2>Brak gatunków.</h2>

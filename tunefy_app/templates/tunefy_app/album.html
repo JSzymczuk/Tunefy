@@ -1,0 +1,43 @@
+{% extends 'tunefy_app/layout.html' %}
+
+{% block title %}{{ album.name }}{% endblock %}
+
+{% block content %}
+
+    {% if album %}
+
+        <h1>{{ album.name }}</h1>
+        <h4><a href="{% url 'artist' album.artist.id %}">{{ album.artist }}</a></h4>
+        {{ album.date_released|date:'Y' }}
+
+{#        {% for genre in album.genres %}#}
+{#            {{ genre }}#}
+{#        {% endfor %}#}
+
+        {% if album.image %}
+            <a href="{{ album.image.url }}">
+                <img src="{{ album.thumb.url }}" alt="{{ album.name }}">
+            </a>
+        {% endif %}
+
+        {% if tracks %}
+            <ol>
+                {% for track in tracks %}
+                    <li>
+                        <div>
+                            {{ track.song.title }}
+                            {% for artist in track.song.artists.all %}
+                                <a href="{% url 'artist' artist.id %}">{{ artist }}</a>
+                            {% endfor %}
+                        </div>
+                        <div>{{ track.popularity }}</div>
+                    </li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+
+    {% else %}
+        <h3>Nie znaleziono albumu</h3>
+    {% endif %}
+
+{% endblock %}

@@ -10,7 +10,7 @@ default_page_size = 5
 
 def index(request, page_number=1, page_size=default_page_size):
     context = get_paginated_context(Artist.objects.all(), page_number, page_size)
-    return render(request, 'artist/index.html', context)
+    return render(request, 'tunefy_cms/artist/index.html', context)
 
 
 def create(request):
@@ -21,7 +21,7 @@ def create(request):
             return redirect('artist.index')
     else:
         form = CreateArtistForm()
-    return render(request, 'artist/create.html', {
+    return render(request, 'tunefy_cms/artist/create.html', {
         'form': form
     })
 
@@ -36,7 +36,7 @@ def edit(request, id):
             return redirect('artist.index')
     else:
         form = CreateArtistForm(instance = artist)
-    return render(request, 'artist/edit.html', {
+    return render(request, 'tunefy_cms/artist/edit.html', {
         'form': form,
         'artist_id': id
     })

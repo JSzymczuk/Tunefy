@@ -1,0 +1,16 @@
+{#<div>#}
+{#    {% if track.album.image %}#}
+{#        <a href="{{ track.album.image.url }}">#}
+{#            <img src="{{ track.album.thumb.url }}" alt="{{ track.album.name }}">#}
+{#        </a>#}
+{#    {% endif %}#}
+{#</div>#}
+<div>
+    <div>{{ track.song.title }}</div>
+    <div>
+        {% for artist in track.song.artists.all %}
+            <a href="{% url 'artist' artist.id %}">{{ artist }}</a>
+        {% endfor %}
+    </div>
+    <div>{{ track.album.name }}</div>
+</div>

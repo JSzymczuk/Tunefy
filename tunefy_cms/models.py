@@ -31,6 +31,7 @@ class ImageThumbModel(Model):
 
 class Artist(ImageThumbModel):
     name = CharField(max_length=50)
+    description = CharField(max_length=1024, blank=True)
     image = ImageField(upload_to=path_and_rename('artists'), blank=True)
     thumb = ImageField(upload_to=path_and_rename('artists/thumbs'), null=True, blank=True)
 
@@ -57,12 +58,13 @@ class Track(Model):
     order = PositiveSmallIntegerField()
     song = ForeignKey('Song', on_delete=CASCADE)
     album = ForeignKey('Album', on_delete=CASCADE)
+    popularity = IntegerField(default=0)
 
     def __str__(self):
         return '{} {}. {}'.format(self.song_id, self.order, self.song)
 
     class Meta:
-        ordering = ('album', 'order', 'song')
+        ordering = ('popularity', 'album', 'order', 'song')
 
 
 class Album(ImageThumbModel):
@@ -78,6 +80,17 @@ class Album(ImageThumbModel):
 
     class Meta:
         ordering = ('date_released',)
+
+
+class PlaylistElement(Model):
+    order = PositiveSmallIntegerField()
+    track = ForeignKey('Track', on_delete=CASCADE)
+    playlist = ForeignKey('Playlist', on_delete=CASCADE)
+
+
+class Playlist(Model):
+    name = CharField(max_length=64)
+    # owner
 
 
 

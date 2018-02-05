@@ -9,7 +9,7 @@ default_page_size = 10
 
 def index(request, page_number=1, page_size=default_page_size):
     context = get_paginated_context(Genre.objects.all(), page_number, page_size)
-    return render(request, 'genre/index.html', context)
+    return render(request, 'tunefy_cms/genre/index.html', context)
 
 
 def create(request):
@@ -20,7 +20,7 @@ def create(request):
             return redirect('genre.index')
     else:
         form = GenreForm()
-    return render(request, 'genre/create.html', {
+    return render(request, 'tunefy_cms/genre/create.html', {
         'form': form
     })
 
@@ -34,7 +34,7 @@ def edit(request, id):
             return redirect('genre.index')
     else:
         form = GenreForm(instance = genre)
-    return render(request, 'genre/edit.html', {
+    return render(request, 'tunefy_cms/genre/edit.html', {
         'form': form,
         'genre_id': id
     })

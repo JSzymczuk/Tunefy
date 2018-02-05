@@ -14,7 +14,7 @@ default_page_size = 5
 def index(request, page_number=1, page_size=default_page_size):
     context = get_paginated_context(Album.objects.all(), page_number, page_size)
     context['tracks'] = Track.objects.all()
-    return render(request, 'album/index.html', context)
+    return render(request, 'tunefy_cms/album/index.html', context)
 
 
 def create(request):
@@ -29,7 +29,7 @@ def create(request):
             return redirect('album.index')
     else:
         form = CreateAlbumForm([])
-    return render(request, 'album/create.html', {
+    return render(request, 'tunefy_cms/album/create.html', {
         'form': form,
         'songs': Song.objects.all()
     })
@@ -64,7 +64,7 @@ def edit(request, id):
             return redirect('album.index')
     else:
         form = CreateAlbumForm(initial_tracks, instance = album)
-    return render(request, 'album/edit.html', {
+    return render(request, 'tunefy_cms/album/edit.html', {
         'album_id': id,
         'form': form,
         'songs': all_songs

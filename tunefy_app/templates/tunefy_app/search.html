@@ -1,0 +1,30 @@
+{% extends 'tunefy_app/layout.html' %}
+
+{% block title %}Wyszukiwanie{% endblock %}
+
+{% block content %}
+
+    <form method="post" action="{% url 'search' %}">
+        {% csrf_token %}
+        <input name="phrase" type="text" placeholder="Wpisz tytuł utworu, albumu lub wykonawcę"/>
+        <button type="submit">Szukaj</button>
+    </form>
+
+    {% if tracks %}
+
+        <table>
+            {% for track in tracks %}
+                <tr>
+                    <td>
+                        {% include 'tunefy_app/search-track.html' with track=track %}
+                    </td>
+{#                    <td><a href="{% url 'song.edit' song.id %}">Edytuj</a></td>#}
+{#                    <td><a href="{% url 'song.delete' song.id %}">Usuń</a></td>#}
+                </tr>
+            {% endfor %}
+        </table>
+
+    {% endif %}
+
+
+{% endblock %}

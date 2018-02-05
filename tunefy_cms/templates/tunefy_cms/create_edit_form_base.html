@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'tunefy_cms/layout.html' %}
 
 {% block page_headline %}
     <h2>{% block title %}{{ title }}{% endblock %}</h2>
@@ -18,7 +18,7 @@
 
         {% csrf_token %}
 
-        {% include "form_field_set.html" with form=form %}
+        {% include "tunefy_cms/form_field_set.html" with form=form %}
 
         <input type="submit" value="{{ form_confirm_text }}" />
         <a href="{% url form_cancel_action %}">{{ form_cancel_text }}</a>

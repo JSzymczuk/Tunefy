@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tunefy_cms',
+    'tunefy_app',
     'django_thumbs',
     'django_user_agents'
 ]

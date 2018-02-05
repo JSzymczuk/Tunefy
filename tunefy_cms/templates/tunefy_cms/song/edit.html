@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'tunefy_cms/layout.html' %}
 
 {% block page_headline %}
     <h2>{% block title %}Edytuj utwór{% endblock %}</h2>
@@ -10,7 +10,7 @@
     <form action="{% url 'song.edit' song_id %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-        {% include "form_field_set.html" with form=form %}
+        {% include "tunefy_cms/form_field_set.html" with form=form %}
 
         <input type="submit" value="Zapisz zmiany" />
         <a href="{% url 'song.index' %}">Anuluj</a>

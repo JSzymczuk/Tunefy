@@ -44,6 +44,7 @@
                             {% endif %}
                         </div>
                         <div>{{ track.popularity }}</div>
+                        <a href="{% url 'playlist.add_element' track.id %}">A</a>
                     </li>
                 {% endfor %}
             </ol>

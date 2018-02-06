@@ -30,7 +30,7 @@
                                 <a href="{% url 'artist' artist.id %}">{{ artist }}</a>
                             {% endfor %}
                         </div>
-                        <div>{{ track.popularity }}</div>
+                        <a href="{% url 'playlist.add_element' track.id %}">A</a>
                     </li>
                 {% endfor %}
             </ol>

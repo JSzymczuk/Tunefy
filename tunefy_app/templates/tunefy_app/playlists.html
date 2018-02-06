@@ -1,0 +1,35 @@
+{% extends 'tunefy_app/layout.html' %}
+
+{% block title %}Listy odtwarzania{% endblock %}
+
+{% block content %}
+
+    <form method="post" action="{% url 'playlist.create' %}">
+        {% csrf_token %}
+        <input name="name" type="text" placeholder="Nowa playlista"/>
+        <button type="submit">Dodaj</button>
+    </form>
+
+    {% if playlists %}
+
+        <ol>
+            {% for playlist in playlists %}
+                <li>
+                    <a href="{% url 'playlist.index' playlist.id %}">
+                        {{ playlist.name }}
+                    </a>
+
+                    {% if current_playlist == playlist.id %}
+
+                    {% else %}
+                        <a href="{% url 'playlist.select' playlist.id %}">A</a>
+                    {% endif %}
+                    <a href="{% url 'playlist.delete' playlist.id %}">D</a>
+                </li>
+            {% endfor %}
+        </ol>
+
+    {% endif %}
+
+
+{% endblock %}

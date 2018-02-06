@@ -1,5 +1,5 @@
 from django.forms import ModelForm, ModelChoiceField
-from tunefy_cms.models import Artist, Song, Genre, Album
+from tunefy_cms.models import Artist, Song, Genre, Album, Playlist
 
 
 class GenreForm(ModelForm):
@@ -44,4 +44,3 @@ class CreateAlbumForm(ThumbModelForm):
     def __init__(self, initial_tracks, *args, **kwargs):
         super(CreateAlbumForm, self).__init__(*args, **kwargs)
         self.initial_tracks = initial_tracks
-

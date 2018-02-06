@@ -2,4 +2,89 @@
 
 {% block title %}Strona główna{% endblock %}
 
-{% block content %}{% endblock %}
+{% block content %}
+
+    <div id="playlists" style="background-color: #6DDCBD">
+        <form id="add-playlist-form" method="post" action="{% url 'playlist.create' %}">
+            {% csrf_token %}
+            <input name="name" type="text" placeholder="Nowa playlista"/>
+            <button type="submit">Dodaj</button>
+        </form>
+    </div>
+
+    <div id="search" style="background-color: #5E5694">
+        <form id="search-form" method="post" action="{% url 'search' %}">
+            {% csrf_token %}
+            <input name="phrase" type="text" placeholder="Wpisz tytuł utworu, albumu lub wykonawcę"/>
+            <button type="submit">Szukaj</button>
+        </form>
+    </div>
+
+    <div id="current-content" style="background-color: #417690">
+
+    </div>
+
+
+    <script>
+
+        $(document).ready(function() {
+            $.ajax({
+                url: "{% url 'playlist.index' %}",
+                type: "get",
+                dataType: "html",
+                success: function (response) {
+                    $('#playlists').html(response);
+                }
+            });
+        });
+
+        $(document).on('submit', '#add-playlist-form', function (event) {
+            event.preventDefault();
+            $.ajax({
+                url: "{% url 'playlist.create' %}",
+                type: "post",
+                dataType: "html",
+                data: $(this).serialize(),
+                success: function (response) {
+                    $('#playlists').html(response);
+                }
+            });
+        });
+
+        $(document).on('submit', '#search-form', function(event){
+            event.preventDefault();
+            $.ajax({
+                url: "{% url 'search' %}",
+                type: "post",
+                dataType: "html",
+                data: $(this).serialize(),
+                success: function (response) {
+                    $('#current-content').html(response);
+                }
+            });
+        });
+
+        $(document).on('click', '#playlists a.select-playlist-link, #playlists a.delete-playlist-link', function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: $(this).attr('href'),
+                success: function (response) {
+                    $('#playlists').html(response);
+                }
+            });
+        });
+
+        $(document).on('click', '#playlists a.playlist-link, #current-content a', function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: $(this).attr('href'),
+                success: function (response) {
+                    $('#current-content').html(response);
+                }
+            });
+        });
+
+
+    </script>
+
+{% endblock %}

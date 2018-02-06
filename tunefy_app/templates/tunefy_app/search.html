@@ -1,66 +1,51 @@
-{% extends 'tunefy_app/layout.html' %}
 
-{% block title %}Wyszukiwanie{% endblock %}
-
-{% block content %}
-
-    <form method="post" action="{% url 'search' %}">
-        {% csrf_token %}
-        <input name="phrase" type="text" placeholder="Wpisz tytuł utworu, albumu lub wykonawcę"/>
-        <button type="submit">Szukaj</button>
-    </form>
-
-
-    {% if artists %}
-        <h2>Wykonawcy:</h2>
-        <ol>
-            {% for artist in artists %}
-                <li>
-                    {% if artist.image %}
-                        <a href="{% url 'artist' artist.id %}">
-                            <img src="{{ artist.thumb.url }}" alt="{{ artist.name }}">
-                        </a>
-                    {% endif %}
-                <a href="{% url 'artist' artist.id %}">{{ artist.name }}</a>
-                </li>
-            {% endfor %}
-        </ol>
-    {% endif %}
-
-    {% if albums %}
-        <h2>Albumy:</h2>
-        <ol>
-        {% for album in albums %}
+{% if artists %}
+    <h2>Wykonawcy:</h2>
+    <ol>
+        {% for artist in artists %}
             <li>
-                {% if album.image %}
-                    <a href="{% url 'album' album.id %}">
-                        <img src="{{ album.thumb.url }}" alt="{{ album.name }}">
+                {% if artist.image %}
+                    <a href="{% url 'artist' artist.id %}">
+                        <img src="{{ artist.thumb.url }}" alt="{{ artist.name }}">
                     </a>
                 {% endif %}
-                <a href="{% url 'album' album.id %}">{{ album.name }}</a>
-                {{ album.date_released|date:'Y' }}
+            <a href="{% url 'artist' artist.id %}">{{ artist.name }}</a>
             </li>
         {% endfor %}
-        </ol>
-    {% endif %}
+    </ol>
+{% endif %}
 
+{% if albums %}
+    <h2>Albumy:</h2>
+    <ol>
+    {% for album in albums %}
+        <li>
+            {% if album.image %}
+                <a href="{% url 'album' album.id %}">
+                    <img src="{{ album.thumb.url }}" alt="{{ album.name }}">
+                </a>
+            {% endif %}
+            <a href="{% url 'album' album.id %}">{{ album.name }}</a>
+            {{ album.date_released|date:'Y' }}
+        </li>
+    {% endfor %}
+    </ol>
+{% endif %}
 
-    {% if tracks %}
-        <h2>Utwory:</h2>
-        <ol>
-            {% for track in tracks %}
-                <li>
-                    {{ track.song.title }}
-                    <div>
-                        {% for artist in track.song.artists.all %}
-                            <a href="{% url 'artist' artist.id %}">{{ artist }}</a>
-                        {% endfor %}
-                    </div>
-                    <a href="{% url 'album' track.album.id %}">{{ track.album.name }}</a>
-                    <a href="{% url 'playlist.add_element' track.id %}">A</a>
-                </li>
-            {% endfor %}
-        </ol>
-    {% endif %}
-
-{% endblock %}
+{% if tracks %}
+    <h2>Utwory:</h2>
+    <ol>
+        {% for track in tracks %}
+            <li>
+                {{ track.song.title }}
+                <div>
+                    {% for artist in track.song.artists.all %}
+                        <a href="{% url 'artist' artist.id %}">{{ artist }}</a>
+                    {% endfor %}
+                </div>
+                <a href="{% url 'album' track.album.id %}">{{ track.album.name }}</a>
+                <a href="{% url 'playlist.add_element' track.id %}">A</a>
+            </li>
+        {% endfor %}
+    </ol>
+{% endif %}

@@ -1,39 +1,31 @@
-{% extends 'tunefy_app/layout.html' %}
+{% if playlist %}
 
-{% block title %}{{ artist.name }}{% endblock %}
+    <h2>{{ playlist.name }}</h2>
 
-{% block content %}
-
-    {% if playlist %}
-
-        <h2>{{ playlist.name }}</h2>
-
-        {% if elements %}
-            <ol>
-                {% for element in elements %}
-                    <li>
-                        {{ element.order }}
-                        <div>
-                            {% if element.track.album.image %}
-                                <a href="{% url 'album' element.track.album.id %}">
-                                    <img src="{{ element.track.album.thumb.url }}" alt="{{ element.track.album.name }}">
-                                </a>
-                            {% endif %}
-                        </div>
-                        <div>
-                            {{ element.track.song.title }}
-                            {% for artist in element.track.song.artists.all %}
-                                <a href="{% url 'artist' artist.id %}">{{ artist }}</a>
-                            {% endfor %}
-                        </div>
-                        <a href="{% url 'playlist.remove_element' element.id %}">D</a>
-                    </li>
-                {% endfor %}
-            </ol>
-        {% endif %}
-
-    {% else %}
-        <h3>Ta lista odtwarzania jest pusta.</h3>
+    {% if elements %}
+        <ol>
+            {% for element in elements %}
+                <li>
+                    {{ element.order }}
+                    <div>
+                        {% if element.track.album.image %}
+                            <a href="{% url 'album' element.track.album.id %}">
+                                <img src="{{ element.track.album.thumb.url }}" alt="{{ element.track.album.name }}">
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div>
+                        {{ element.track.song.title }}
+                        {% for artist in element.track.song.artists.all %}
+                            <a href="{% url 'artist' artist.id %}">{{ artist }}</a>
+                        {% endfor %}
+                    </div>
+                    <a href="{% url 'playlist.remove_element' element.id %}">D</a>
+                </li>
+            {% endfor %}
+        </ol>
     {% endif %}
 
-{% endblock %}
+{% else %}
+    <h3>Ta lista odtwarzania jest pusta.</h3>
+{% endif %}

@@ -1,35 +1,27 @@
-{% extends 'tunefy_app/layout.html' %}
 
-{% block title %}Listy odtwarzania{% endblock %}
+<form id="add-playlist-form" method="post" action="{% url 'playlist.create' %}">
+    {% csrf_token %}
+    <input name="name" type="text" placeholder="Nowa playlista"/>
+    <button type="submit">Dodaj</button>
+</form>
 
-{% block content %}
+{% if playlists %}
 
-    <form method="post" action="{% url 'playlist.create' %}">
-        {% csrf_token %}
-        <input name="name" type="text" placeholder="Nowa playlista"/>
-        <button type="submit">Dodaj</button>
-    </form>
+    <ol>
+        {% for playlist in playlists %}
+            <li>
+                <a href="{% url 'playlist.index' playlist.id %}" class="playlist-link">
+                    {{ playlist.name }}
+                </a>
 
-    {% if playlists %}
+                {% if current_playlist == playlist.id %}
 
-        <ol>
-            {% for playlist in playlists %}
-                <li>
-                    <a href="{% url 'playlist.index' playlist.id %}">
-                        {{ playlist.name }}
-                    </a>
+                {% else %}
+                    <a href="{% url 'playlist.select' playlist.id %}" class="select-playlist-link">A</a>
+                {% endif %}
+                <a href="{% url 'playlist.delete' playlist.id %}" class="delete-playlist-link">D</a>
+            </li>
+        {% endfor %}
+    </ol>
 
-                    {% if current_playlist == playlist.id %}
-
-                    {% else %}
-                        <a href="{% url 'playlist.select' playlist.id %}">A</a>
-                    {% endif %}
-                    <a href="{% url 'playlist.delete' playlist.id %}">D</a>
-                </li>
-            {% endfor %}
-        </ol>
-
-    {% endif %}
-
-
-{% endblock %}
+{% endif %}

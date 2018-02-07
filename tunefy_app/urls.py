@@ -16,6 +16,13 @@ urlpatterns = [
     path('account/',          include('django.contrib.auth.urls')),
     path('account/register/', views.register, name='register'    ),
 
+    path('play/<track_id>/<playlist_id>/<album_id>/', views.play_track, name='track.play'),
+    path('play/<track_id>/<playlist_id>/',            views.play_track, name='track.play'),
+    path('play/<track_id>/',                          views.play_track, name='track.play'),
+    path('play/',                                     views.get_track,  name='track.play'),
+
+    path('settings/volume/<volume>/', views.set_volume, name='volume.set'),
+
     path('album/<id>/',   views.album,    name='album'  ),
     path('artist/<id>/',  views.artist,   name='artist' ),
     path('search/',       views.search,   name='search' ),

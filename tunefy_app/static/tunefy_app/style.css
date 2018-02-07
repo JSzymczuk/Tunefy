@@ -48,6 +48,7 @@ nav {
 main {
 	top: 135px;
 	right: 0;
+    overflow-y: auto;
 }
 
 p {
@@ -280,6 +281,10 @@ side ol li:hover a:hover { color: #fff; text-decoration: underline; }
     background: #000;
 }
 
+.player-box .album-cover img {
+    height: 100%;
+}
+
 .player-box .player {
 	margin-left: 106px;
     position: relative;
@@ -313,19 +318,22 @@ side ol li:hover a:hover { color: #fff; text-decoration: underline; }
     top: -1px;
 }
 
-.player-box .song-info a {
+.player-box .song-info .artists {
+	color: #ccc;
     font-size: 14px;
     font-weight: 300;
-    color: #ccc;
     bottom: 1px;
     position: absolute;
+}
+
+.player-box .song-info .artists a {
+    color: #ccc;
 	cursor: pointer;
 }
 
-.player-box .song-info a:hover {
-	color: #ccc;
+.player-box .song-info .artists a:hover {
+    color: #ccc;
 	text-decoration: underline;
-	transiton: 0.2s linear;
 }
 
 .player-box .options,
@@ -389,6 +397,11 @@ side ol li:hover a:hover { color: #fff; text-decoration: underline; }
     position: absolute;
 }
 
+.player-box .time-bar .current,
+.player-box .volume-bar .current {
+    width: 0;
+}
+
 .player-box .time span {
     font-size: 10px;
     letter-spacing: 1.5px;
@@ -413,7 +426,7 @@ side ol li:hover a:hover { color: #fff; text-decoration: underline; }
 .player-box .volume #volume-icon[level="1"] { background-position-x: -120px; }
 .player-box .volume #volume-icon[level="0"] { background-position-x: -160px; }
 
-.player-box .time-bar .total { background-color: #000; }
+.player-box .time-bar .total { background-color: rgb(96, 128, 128); /*#000;*/ }
 .player-box .time-bar .buffered, .player-box .volume-bar .total { background-color: rgb(96, 128, 128); }
 .player-box .time-bar .current, .player-box .volume-bar .current  { background-color: #ccc; }
 
@@ -429,7 +442,7 @@ side ol li:hover a:hover { color: #fff; text-decoration: underline; }
 	height: 40px;
 	background-image: url(icons.png);
 	opacity: 0.7;
-	transition: 0.2s linear;
+	transition: none;
 	top: -1.5px;
     left: -1.5px;
 }
@@ -438,11 +451,12 @@ side ol li:hover a:hover { color: #fff; text-decoration: underline; }
 	opacity: 1;
 }
 
-#play-button:after       { background-position:    0px 0; }
-#prev-track-button:after { background-position:  -40px 0; }
-#next-track-button:after { background-position:  -80px 0; }
-#shuffle-button:after    { background-position: -120px 0; }
-#repeat-button:after     { background-position: -160px 0; }
+#play-button:after          { background-position:    0px 0; }
+#prev-track-button:after    { background-position:  -40px 0; }
+#next-track-button:after    { background-position:  -80px 0; }
+#repeat-button:after        { background-position: -120px 0; }
+#shuffle-button:after       { background-position: -160px 0; }
+#play-button[playing]:after { background-position: -200px 0; }
 
 input[type=text], input[type=number] {
 	display: block;

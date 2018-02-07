@@ -18,41 +18,8 @@
 
 	<nav>
 
-		<div class='player-box'>
-			<a class='album-cover'>
-				<img alt='okładka albumu' src='testalbum.png'>
-			</a>
-			<div class='player'>
-				<div class='controls'>
-					<div id='prev-track-button' class='button'></div>
-					<div id='play-button'       class='button'></div>
-					<div id='next-track-button' class='button'></div>
-					<div class='song-info'>
-						<h4>Chciałem być</h4>
-						<a>Krzysztof Krawczyk</a>
-					</div>
-					<div class='volume'>
-						<div id='volume-icon' level='4'></div>
-						<div class='volume-bar'>
-							<div class='total'></div>
-							<div class='current' style='width: 75%'></div>
-						</div>
-					</div>
-					<div class='options'>
-						<div id='shuffle-button' class='button'></div>
-						<div id='repeat-button'  class='button'></div>
-					</div>
-				</div>
-				<div class='time'>
-					<div class='time-bar'>
-						<div class='total'></div>
-						<div class='buffered' style='width: 65%'></div>
-						<div class='current'  style='width: 35%'></div>
-					</div>
-					<span class='left' >1:24</span>
-					<span class='right'>3:56</span>
-				</div>
-			</div>
+		<div id='player' class='player-box'>
+
 		</div>
 
         <div id='search' class='search-bar'>
@@ -90,7 +57,6 @@
 
 
     <script>
-
         $(document).ready(function() {
             $.ajax({
                 url: "{% url 'playlist.index' %}",
@@ -138,7 +104,10 @@
             });
         });
 
-        $(document).on('click', '#playlists a.playlist-link, #current-content a', function(event) {
+        $(document).on('click', '#playlists a.playlist-link:not(.play-button),'
+            + '#current-content a:not(.play-button), #player a.album-cover,'
+            + '#player .artists a', function(event) {
+
             event.preventDefault();
             $.ajax({
                 url: $(this).attr('href'),
@@ -148,6 +117,62 @@
             });
         });
 
+        $(document).on('click', '#playlists a.playlist-link.play-button,'
+            + '#current-content a.play-button', function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: $(this).attr('href'),
+                success: function (response) {
+                    $('#player').html(response);
+                }
+            });
+        });
+
+        $(document).on('click', '#play-button', function() {
+            var player = $('#player-audio').get(0);
+            if (player !== undefined) {
+                var attr = $(this).attr('playing');
+                if (typeof attr !== typeof undefined && attr !== false) {
+                    pauseTrack();
+                }
+                else {
+                    playTrack();
+                }
+            }
+        });
+
+        function playTrack() {
+            $('#player-audio').get(0).play();
+            $('#play-button').attr('playing', '');
+        }
+
+        function pauseTrack() {
+            $('#player-audio').get(0).pause();
+            $('#play-button').removeAttr('playing');
+        }
+
+        function stopTrack() {
+            var player = $('#player-audio').get(0);
+            player.pause();
+            player.currentTime = 0;
+            $('#play-button').removeAttr('playing');
+        }
+
+        function updateTime() {
+            var currentTime = Math.floor(this.currentTime);
+            var seconds = currentTime % 60;
+            var str = Math.floor(currentTime / 60) + ':' + (seconds < 10 ? '0' + seconds : seconds);
+            $('#current-time-value').text(str);
+            $('#current-time-bar').css('width', (Math.min(100, 100 * currentTime / this.duration)) + '%');
+        }
+
+        function setVolume(volume) {
+            volume = Math.max(0, Math.min(1, parseFloat(volume)));
+            $('.volume .current').css('width', (volume * 100) + '%');
+            $('#player-audio').get(0).volume = volume;
+            $('#volume-icon').attr('level', volume > 0.7 ? 4 : volume > 0.4 ? 3 : volume > 0.1 ? 2 : 1);
+            $.ajax({ url: 'settings/volume/' + volume });
+        }
 
     </script>
 

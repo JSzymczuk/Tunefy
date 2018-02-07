@@ -1,0 +1,67 @@
+{% if track %}
+
+    <a href='{% url 'album' track.album.id %}' class='album-cover'>
+        <img src='{{ track.album.thumb.url }}' alt=''>
+    </a>
+    <div class='player'>
+        <div class='controls'>
+            <div id='prev-track-button' class='button'></div>
+            <div id='play-button'       class='button'></div>
+            <div id='next-track-button' class='button'></div>
+            <div class='song-info'>
+                <h4>{{ track.song.title }}</h4>
+                <div class="artists">
+                    {% for artist in track.song.artists.all %}
+                        <a href="{% url 'artist' artist.id %}">{{ artist }}</a>{% if forloop.counter < track.song.artists.all|length %}, {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class='volume'>
+                <div id='volume-icon' level='4'></div>
+                <div class='volume-bar'>
+                    <div class='total'></div>
+                    <div class='current' style="width: {{ volume }}"></div>
+                </div>
+            </div>
+            <div class='options'>
+                <div id='shuffle-button' class='button'></div>
+                <div id='repeat-button'  class='button'></div>
+            </div>
+        </div>
+        <div class='time'>
+            <div class='time-bar'>
+                <div id='total-time-bar'    class='total'></div>
+                <!--<div id='buffered-time-bar' class='buffered'></div>-->
+                <div id='current-time-bar'  class='current'></div>
+            </div>
+            <span class='left' id='current-time-value'>0:00</span>
+            <span class='right'>{{ minutes }}:{{ seconds }}</span>
+        </div>
+    </div>
+
+    <audio id='player-audio'>
+        <source src="{{ track.song.audio.url }}" type="audio/mpeg">
+    </audio>
+
+    <script>
+        $(document).ready(function() {
+            var player = $('#player-audio');
+            player.bind('timeupdate', updateTime);
+            player.bind('ended', stopTrack);
+            playTrack();
+            setVolume({{ volume }});
+
+            $('.time-bar').on('click', function (e) {
+               var progress = (e.pageX - $(this).offset().left) / $(this).width();
+               var player = $('#player-audio').get(0);
+               playTrack();
+               player.currentTime = Math.max(0, Math.min(1, progress)) * player.duration;
+            });
+
+            $('.volume-bar').on('click', function (e) {
+               setVolume((e.pageX - $(this).offset().left) / $(this).width());
+            });
+        });
+    </script>
+
+{% endif %}

@@ -2,45 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65168e08-c804-46b4-bd5f-2300ddf4a3f0" name="Default" comment="Initial commit">
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/button-back.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/button-hover-back.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/icons.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/input-bottom.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/input-middle.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/input-top.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/input.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/scrollbararrows.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/style.css" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/tunefy-logo-medium-1.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/tunefy-logo-medium.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/tunefy-logo-side.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/tunefy-logo-small.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/welcome-panel-back.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/welcome-panel-left.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/welcome-panel-right.png" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/templates/registration/login.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/templates/registration/register.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_cms/migrations/0012_playlist_owner.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_cms/templates/tunefy_cms/user/index.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_cms/views/user.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/player.html" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change beforePath="$PROJECT_DIR$/tunefy/settings.py" afterPath="$PROJECT_DIR$/tunefy/settings.py" />
+      <change beforePath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/icons.png" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/icons.png" />
+      <change beforePath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/style.css" afterPath="$PROJECT_DIR$/tunefy_app/static/tunefy_app/style.css" />
+      <change beforePath="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/album.html" afterPath="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/album.html" />
       <change beforePath="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/index.html" afterPath="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/index.html" />
-      <change beforePath="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/layout.html" afterPath="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/layout.html" />
-      <change beforePath="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/playlists.html" afterPath="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/playlists.html" />
       <change beforePath="$PROJECT_DIR$/tunefy_app/urls.py" afterPath="$PROJECT_DIR$/tunefy_app/urls.py" />
       <change beforePath="$PROJECT_DIR$/tunefy_app/views.py" afterPath="$PROJECT_DIR$/tunefy_app/views.py" />
-      <change beforePath="$PROJECT_DIR$/tunefy_cms/admin.py" afterPath="$PROJECT_DIR$/tunefy_cms/admin.py" />
-      <change beforePath="$PROJECT_DIR$/tunefy_cms/file_manager.py" afterPath="$PROJECT_DIR$/tunefy_cms/file_manager.py" />
-      <change beforePath="$PROJECT_DIR$/tunefy_cms/models.py" afterPath="$PROJECT_DIR$/tunefy_cms/models.py" />
-      <change beforePath="$PROJECT_DIR$/tunefy_cms/templates/tunefy_cms/layout.html" afterPath="$PROJECT_DIR$/tunefy_cms/templates/tunefy_cms/layout.html" />
-      <change beforePath="$PROJECT_DIR$/tunefy_cms/urls.py" afterPath="$PROJECT_DIR$/tunefy_cms/urls.py" />
-      <change beforePath="$PROJECT_DIR$/tunefy_cms/views/album.py" afterPath="$PROJECT_DIR$/tunefy_cms/views/album.py" />
-      <change beforePath="$PROJECT_DIR$/tunefy_cms/views/artist.py" afterPath="$PROJECT_DIR$/tunefy_cms/views/artist.py" />
-      <change beforePath="$PROJECT_DIR$/tunefy_cms/views/genre.py" afterPath="$PROJECT_DIR$/tunefy_cms/views/genre.py" />
-      <change beforePath="$PROJECT_DIR$/tunefy_cms/views/home.py" afterPath="$PROJECT_DIR$/tunefy_cms/views/home.py" />
-      <change beforePath="$PROJECT_DIR$/tunefy_cms/views/song.py" afterPath="$PROJECT_DIR$/tunefy_cms/views/song.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -71,14 +41,89 @@
     <option name="myCustomStartScript" value="import sys; print('Python %s on %s' % (sys.version, sys.platform))&#10;import django; print('Django %s' % django.get_version())&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;if 'setup' in dir(django): django.setup()&#10;import django_manage_shell; django_manage_shell.run(PROJECT_ROOT)" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tunefy_app/templates/tunefy_app/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="297">
+              <caret line="141" column="11" lean-forward="true" selection-start-line="141" selection-start-column="11" selection-end-line="141" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tunefy_app/static/tunefy_app/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="344">
+              <caret line="402" column="1" lean-forward="true" selection-start-line="402" selection-start-column="1" selection-end-line="402" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="player.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tunefy_app/templates/tunefy_app/player.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1020">
+              <caret line="60" column="37" lean-forward="false" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="37" />
+              <folding>
+                <element signature="e#1015#1042#0#HTML" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tunefy_app/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="23" column="19" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="album.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tunefy_app/templates/tunefy_app/album.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="artist.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tunefy_app/templates/tunefy_app/artist.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="191">
+              <caret line="23" column="69" lean-forward="true" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="69" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tunefy_app/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="229">
+              <caret line="162" column="32" lean-forward="false" selection-start-line="162" selection-start-column="27" selection-end-line="162" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#22#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
-        <option value="HTML File" />
         <option value="CSS File" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -87,6 +132,12 @@
       <find>tunefy_app</find>
       <find>nav</find>
       <find>side ol</find>
+      <find>album-c</find>
+      <find>main</find>
+      <find>player</find>
+      <find>curre</find>
+      <find>song-info</find>
+      <find>volume</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -101,7 +152,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/tunefy_cms/templates/create_edit_form_base.html" />
         <option value="$PROJECT_DIR$/tunefy_cms/templates/genre/create.html" />
         <option value="$PROJECT_DIR$/tunefy_cms/templates/artist/create.html" />
         <option value="$PROJECT_DIR$/tunefy_cms/templates/artist/edit.html" />
@@ -127,7 +177,6 @@
         <option value="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/search-track.html" />
         <option value="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/search.html" />
         <option value="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/playlist.html" />
-        <option value="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/album.html" />
         <option value="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/artist.html" />
         <option value="$PROJECT_DIR$/tunefy_cms/templates/tunefy_cms/layout.html" />
         <option value="$PROJECT_DIR$/tunefy_cms/admin.py" />
@@ -141,17 +190,19 @@
         <option value="$PROJECT_DIR$/tunefy_cms/views/album.py" />
         <option value="$PROJECT_DIR$/tunefy_cms/views/search.py" />
         <option value="$PROJECT_DIR$/tunefy_cms/models.py" />
-        <option value="$PROJECT_DIR$/tunefy_app/views.py" />
         <option value="$PROJECT_DIR$/static/style.css" />
-        <option value="$PROJECT_DIR$/tunefy_app/urls.py" />
         <option value="$PROJECT_DIR$/tunefy/settings.py" />
         <option value="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/layout.html" />
         <option value="$PROJECT_DIR$/tunefy_app/templates/registration/login.html" />
         <option value="$PROJECT_DIR$/tunefy_app/templates/registration/register.html" />
         <option value="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/playlists.html" />
+        <option value="$PROJECT_DIR$/tunefy_cms/urls.py" />
+        <option value="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/album.html" />
+        <option value="$PROJECT_DIR$/tunefy_app/urls.py" />
+        <option value="$PROJECT_DIR$/tunefy_app/views.py" />
+        <option value="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/player.html" />
         <option value="$PROJECT_DIR$/tunefy_app/static/tunefy_app/style.css" />
         <option value="$PROJECT_DIR$/tunefy_app/templates/tunefy_app/index.html" />
-        <option value="$PROJECT_DIR$/tunefy_cms/urls.py" />
       </list>
     </option>
   </component>
@@ -188,6 +239,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -215,13 +268,6 @@
               <item name="Tunefy" type="b2602c69:ProjectViewProjectNode" />
               <item name="Tunefy" type="462c0819:PsiDirectoryNode" />
               <item name="tunefy_app" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="tunefy_app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Tunefy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Tunefy" type="462c0819:PsiDirectoryNode" />
-              <item name="tunefy_app" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -229,26 +275,12 @@
               <item name="Tunefy" type="462c0819:PsiDirectoryNode" />
               <item name="tunefy_app" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="registration" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Tunefy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Tunefy" type="462c0819:PsiDirectoryNode" />
               <item name="tunefy_app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="tunefy_app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Tunefy" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Tunefy" type="462c0819:PsiDirectoryNode" />
-              <item name="tunefy_cms" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -614,23 +646,24 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="manage.py@tunefy" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32968238" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32858709" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33734939" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Mongo Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22619048" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295583" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14821428" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14761905" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27559525" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39868566" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39868566" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="manage.py@tunefy" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32968238" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -658,11 +691,6 @@
           <line>6</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tunefy_app/views.py</url>
-          <line>128</line>
-          <option name="timeStamp" value="55" />
-        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -671,18 +699,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="56" />
+      <option name="time" value="63" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tunefy_cms/templates/tunefy_cms/artist/create.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="41" lean-forward="false" selection-start-line="0" selection-start-column="41" selection-end-line="0" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tunefy_cms/templates/tunefy_cms/artist/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="79">
@@ -718,14 +739,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tunefy_app/templates/tunefy_app/search-track.html" />
-    <entry file="file://$PROJECT_DIR$/tunefy_app/templates/tunefy_app/artist.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="62" column="15" lean-forward="false" selection-start-line="62" selection-start-column="15" selection-end-line="62" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tunefy_app/templates/tunefy_app/playlist.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -746,7 +759,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="16" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -778,9 +790,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="26" lean-forward="false" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#32#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -832,7 +841,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -888,19 +896,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tunefy_app/templates/tunefy_app/album.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" column="13" lean-forward="false" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tunefy_cms/templates/tunefy_cms/album/create.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -913,11 +912,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tunefy_app/static/tunefy_app/tunefy-logo-medium.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tunefy_app/static/tunefy_app/icons.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
@@ -986,22 +980,50 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tunefy_app/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="23" column="65" lean-forward="false" selection-start-line="23" selection-start-column="65" selection-end-line="23" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tunefy/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="false" />
           </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tunefy_app/templates/tunefy_app/playlists.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="18" lean-forward="true" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tunefy_cms/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tunefy_app/templates/tunefy_app/artist.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="23" column="69" lean-forward="true" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="191">
+          <caret line="127" column="0" lean-forward="false" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tunefy_app/static/tunefy_app/icons.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tunefy_app/templates/tunefy_app/layout.html">
@@ -1012,54 +1034,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tunefy_app/templates/tunefy_app/playlists.html">
+    <entry file="file://$PROJECT_DIR$/tunefy_app/templates/tunefy_app/album.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="18" lean-forward="true" selection-start-line="7" selection-start-column="18" selection-end-line="7" selection-end-column="18" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tunefy_app/static/tunefy_app/style.css">
+    <entry file="file://$PROJECT_DIR$/tunefy_app/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="54" column="16" lean-forward="true" selection-start-line="54" selection-start-column="16" selection-end-line="54" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/django/core/handlers/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="159" column="0" lean-forward="false" selection-start-line="159" selection-start-column="0" selection-end-line="159" selection-end-column="0" />
+        <state relative-caret-position="340">
+          <caret line="23" column="19" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tunefy_app/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="134" column="0" lean-forward="false" selection-start-line="134" selection-start-column="0" selection-end-line="134" selection-end-column="0" />
+        <state relative-caret-position="229">
+          <caret line="162" column="32" lean-forward="false" selection-start-line="162" selection-start-column="27" selection-end-line="162" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#22#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tunefy_app/static/tunefy_app/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="402" column="1" lean-forward="true" selection-start-line="402" selection-start-column="1" selection-end-line="402" selection-end-column="1" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tunefy_app/templates/tunefy_app/player.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1020">
+          <caret line="60" column="37" lean-forward="false" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="37" />
+          <folding>
+            <element signature="e#1015#1042#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tunefy_app/templates/tunefy_app/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="66" column="50" lean-forward="true" selection-start-line="66" selection-start-column="50" selection-end-line="66" selection-end-column="50" />
-          <folding>
-            <element signature="e#1078#1096#0#HTML" expanded="true" />
-            <element signature="e#1396#1414#0#HTML" expanded="true" />
-            <element signature="e#1450#1468#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tunefy_cms/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="27" column="0" lean-forward="true" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        <state relative-caret-position="297">
+          <caret line="141" column="11" lean-forward="true" selection-start-line="141" selection-start-column="11" selection-end-line="141" selection-end-column="11" />
           <folding />
         </state>
       </provider>

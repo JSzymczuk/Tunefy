@@ -1,3 +1,5 @@
+from math import floor
+
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponse, HttpResponseRedirect
@@ -5,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from tunefy_cms.models import Song, Track, Artist, Album, Playlist, PlaylistElement
+from mutagen.mp3 import MP3
 
 
 @login_required(redirect_field_name=None)
@@ -122,6 +125,45 @@ def remove_track(request, id):
                     playlist_element.save()
             element.delete()
     return HttpResponseRedirect(reverse('playlist.index', kwargs={ 'id': playlist.id }))
+
+
+@login_required(redirect_field_name=None)
+def play_track(request, track_id, playlist_id=None, album_id=None):
+    track = Track.objects.filter(id=track_id).first()
+    if track != None and track.song != None and track.song.audio != None:
+        response = HttpResponseRedirect(reverse('track.play'))
+        response.set_cookie("track", track_id)
+        return response
+    return render(request, 'tunefy_app/player.html', {
+        'track': None
+    })
+
+
+@login_required(redirect_field_name=None)
+def get_track(request):
+    track = Track.objects.filter(id=request.COOKIES.get('track')).first()
+    audio = MP3(track.song.audio)
+    try:
+        len = audio.info.length
+        minutes = floor(len / 60)
+        seconds = int(len) % 60
+    except:
+        minutes = 0
+        seconds = 0
+    return render(request, 'tunefy_app/player.html', {
+        'track': track,
+        'minutes': minutes,
+        'seconds': str(seconds).zfill(2),
+        'volume': request.COOKIES.get('volume', 1)
+    })
+
+
+@login_required(redirect_field_name=None)
+def set_volume(request, volume):
+    volume = min(1, max(0, float(volume)));
+    response = HttpResponse('Volume changed to 0.')
+    response.set_cookie('volume', volume)
+    return response
 
 
 def register(request):

@@ -4,25 +4,89 @@
 
 {% block content %}
 
-    <div id="playlists" style="background-color: #6DDCBD">
-        <form id="add-playlist-form" method="post" action="{% url 'playlist.create' %}">
-            {% csrf_token %}
-            <input name="name" type="text" placeholder="Nowa playlista"/>
-            <button type="submit">Dodaj</button>
-        </form>
-    </div>
+    <side>
+		<div class='logo'></div>
 
-    <div id="search" style="background-color: #5E5694">
-        <form id="search-form" method="post" action="{% url 'search' %}">
-            {% csrf_token %}
-            <input name="phrase" type="text" placeholder="Wpisz tytuł utworu, albumu lub wykonawcę"/>
-            <button type="submit">Szukaj</button>
-        </form>
-    </div>
+        <div id="playlists">
+            <form id="add-playlist-form" method="post" action="{% url 'playlist.create' %}">
+                {% csrf_token %}
+                <input name="name" type="text" placeholder="Nowa playlista"/>
+                <input type="submit" value="Dodaj"/>
+            </form>
+        </div>
+	</side>
 
-    <div id="current-content" style="background-color: #417690">
+	<nav>
 
-    </div>
+		<div class='player-box'>
+			<a class='album-cover'>
+				<img alt='okładka albumu' src='testalbum.png'>
+			</a>
+			<div class='player'>
+				<div class='controls'>
+					<div id='prev-track-button' class='button'></div>
+					<div id='play-button'       class='button'></div>
+					<div id='next-track-button' class='button'></div>
+					<div class='song-info'>
+						<h4>Chciałem być</h4>
+						<a>Krzysztof Krawczyk</a>
+					</div>
+					<div class='volume'>
+						<div id='volume-icon' level='4'></div>
+						<div class='volume-bar'>
+							<div class='total'></div>
+							<div class='current' style='width: 75%'></div>
+						</div>
+					</div>
+					<div class='options'>
+						<div id='shuffle-button' class='button'></div>
+						<div id='repeat-button'  class='button'></div>
+					</div>
+				</div>
+				<div class='time'>
+					<div class='time-bar'>
+						<div class='total'></div>
+						<div class='buffered' style='width: 65%'></div>
+						<div class='current'  style='width: 35%'></div>
+					</div>
+					<span class='left' >1:24</span>
+					<span class='right'>3:56</span>
+				</div>
+			</div>
+		</div>
+
+        <div id='search' class='search-bar'>
+            <form id="search-form" method="post" action="{% url 'search' %}">
+                {% csrf_token %}
+                <input name="phrase" type="text" placeholder="Wpisz tytuł utworu, albumu lub wykonawcę"/>
+                <input type="submit" value="Szukaj"/>
+            </form>
+
+            <div class="user-panel">
+                <p>
+                    {% if user.is_authenticated %}
+                        Witaj, {{ user.username }}
+                        {% if user.is_staff %}
+                            <a href="{% url 'cms' %}">Panel administracyjny</a>
+                        {% endif %}
+                        <a href="{% url 'logout' %}">Wyloguj się</a>
+                    {% else %}
+                        Nie jesteś zalogowany. <a href="{% url 'login' %}">Zaloguj się</a>
+                    {% endif %}
+                </p>
+            </div>
+
+        </div>
+
+	</nav>
+
+	<main id="current-content"></main>
+
+
+
+
+
+
 
 
     <script>

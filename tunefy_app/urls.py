@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls.static import static
 from tunefy import settings
 from tunefy_app import views
@@ -12,6 +12,9 @@ urlpatterns = [
     path('playlist/remove_element/<id>/',  views.remove_track,     name='playlist.remove_element' ),
     path('playlist/<id>/',                 views.get_playlist,     name='playlist.index'          ),
     path('playlist/',                      views.get_playlists,    name='playlist.index'          ),
+
+    path('account/',          include('django.contrib.auth.urls')),
+    path('account/register/', views.register, name='register'    ),
 
     path('album/<id>/',   views.album,    name='album'  ),
     path('artist/<id>/',  views.artist,   name='artist' ),

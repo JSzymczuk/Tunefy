@@ -4,7 +4,7 @@
 	{% load static %}
 	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
 	<title>{% block title %}{% endblock %} - Tunefy - The Best Tunes For You</title>
-	<!--<link rel='stylesheet' href="{% static 'style.css' %}"/>-->
+	<!--<link rel='stylesheet' href="{% static 'tunefy_app/style.css' %}"/>-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
@@ -14,9 +14,16 @@
             <a href="{% url 'artist.index' %}">Wykonawcy</a>
             <a href="{% url 'song.index' %}">Utwory</a>
             <a href="{% url 'album.index' %}">Albumy</a>
-            <a href="{% url 'genre.index' %}">Użytkownicy</a>
-            <a href="{% url 'genre.index' %}">Listy odtwarzania</a>
+            <a href="{% url 'user.index' %}">Użytkownicy</a>
         </nav>
+
+        {% if user.is_authenticated %}
+            <p>Hi {{ user.username }}!</p>
+            <p><a href="{% url 'logout' %}">logout</a></p>
+        {% else %}
+            <p>You are not logged in.</p>
+            <a href="{% url 'login' %}">login</a>
+        {% endif %}
 
 		<main>
             {% block page_headline %}{% endblock %}

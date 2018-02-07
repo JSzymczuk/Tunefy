@@ -1,0 +1,36 @@
+{% extends 'tunefy_app/layout.html' %}
+
+{% block page_headline %}
+    <h2>{% block title %}Logowanie{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+
+	<div class='body-content'>
+        <div class='welcome-panel'>
+            <div class='logo'></div>
+
+            <form id="login-form" method="post">
+
+                {% csrf_token %}
+                <h2>Logowanie</h2>
+
+                <div class='form-field-area'>
+                    <div class='error'>Podana nazwa użytkownika jest już zajęta.</div>
+                    <input type='text' name='username' placeholder='Nazwa użytkownika'>
+                </div>
+
+                <div class='form-field-area'>
+                    <div class='error'>Podane hasło jest nieprawidłowe.</div>
+                    <input type='password' name='password' placeholder='Hasło'>
+                </div>
+
+                <button type='submit'>Zaloguj się</button>
+
+                <p>Nie masz konta? <a href="{% url 'register' %}">Zarejestruj się</a>.</p>
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

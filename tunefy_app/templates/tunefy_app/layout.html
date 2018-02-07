@@ -1,24 +1,19 @@
 <!doctype html>
 <html lang='pl'>
 <head>
-	{% load static %}
+	{% load staticfiles %}
 	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
 	<title>{% block title %}{% endblock %} - Tunefy - The Best Tunes For You</title>
-	<!--<link rel='stylesheet' href="{% static 'style.css' %}"/>-->
+	<link rel='stylesheet' href="{% static 'tunefy_app/style.css' %}"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-	<div class='body-content'>
-        <main>
-			{% block content %}{% endblock %}
-		</main>
-	</div>
+    {% block content %}{% endblock %}
 
 	<footer>
 		<div class='copyright'>
 			Systemy Zarządzania Treścią: Projekt zaliczeniowy<br>
-			Platforma ma charakter wyłącznie edukacyjny.<br>
-			&copy;2017 Jakub Szymczuk
+			&copy;2017 Jakub Szymczuk Platforma ma charakter wyłącznie edukacyjny.
 		</div>
 	</footer>
 

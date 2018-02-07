@@ -1,0 +1,587 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+    overflow: hidden;
+	font-family: 'Montserrat', sans-serif;
+	background: linear-gradient(rgb(8, 32, 32), rgb(8, 16, 16));
+}
+
+side, nav, main, footer { position: absolute; }
+
+nav, main  { left: 280px; }
+side, main { bottom: 60px; }
+
+footer {
+	height: 59px;
+    z-index: 100;
+    width: 100%;
+    bottom: 0;
+    background-color: rgb(8, 16, 16);
+    border-top: 1px solid #ddd;
+    color: #ddd;
+	font-size: 12px;
+    line-height: 18px;
+}
+
+side {
+    width: 279px;
+    top: 0;
+    background-color: rgb(8,32,32);
+    border-right: 1px solid #ddd;
+    z-index: 99;
+}
+
+nav {
+    height: 135px;
+	top: 0;
+	right: 0;
+}
+
+main {
+	top: 135px;
+	right: 0;
+}
+
+p {
+    font-family: 'Montserrat', sans-serif;
+    color: #ccc;
+    font-size: 13px;
+    font-weight: 300;
+    text-align: justify;
+}
+
+a {
+	text-decoration: none;
+	color: #222;
+	transition: 0.2s linear;
+}
+
+a:hover { color: #fff; }
+
+.left  { float: left;  }
+.right { float: right; }
+
+.copyright {
+    width: 980px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+/*************************************/
+/* formularz logowania i rejestracji */
+/*************************************/
+
+.welcome-panel:before, .welcome-panel:after {
+	display: block;
+	width: 302px;
+	height: 112px;
+	content: '';
+	position: absolute;
+    top: 70px;
+}
+
+.welcome-panel:before {
+    right: 440px;
+    background: url(welcome-panel-left.png);
+}
+
+.welcome-panel:after {
+    left: 440px;
+    background: url(welcome-panel-right.png);
+}
+
+.welcome-panel {
+	position: absolute;
+    width: 400px;
+    height: 560px;
+    top: 40px;
+    left: 50%;
+    margin-left: -220px;
+    padding: 20px;
+    background: url(welcome-panel-back.png) no-repeat;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.welcome-panel .logo {
+    background: url(tunefy-logo-medium-1.png);
+    width: 100%;
+    background-size: 380px;
+    background-repeat: no-repeat;
+    height: 200px;
+    background-position: center;
+}
+
+.welcome-panel form button {
+	width: 220px;
+    height: 44px;
+    display: block;
+    color: #fff;
+    border: 0;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    margin-left: -110px;
+    cursor: pointer;
+    background: url(button-back.png);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: bold;
+	transition: 0.2s linear;
+}
+
+.welcome-panel form button:hover {
+    background: url(button-hover-back.png);
+}
+
+.welcome-panel form p {
+	position: absolute;
+    bottom: 20px;
+    font-size: 12px;
+    color: #aaa;
+    text-align: center;
+    width: 100%;
+    left: 0;
+}
+
+.welcome-panel form p a {
+    color: #aaa;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.welcome-panel form p a:hover {
+    color: #fff;
+}
+
+.welcome-panel form {
+	width: 300px;
+	margin: 0 auto;
+}
+
+.welcome-panel form input[type=text], .welcome-panel form input[type=password] {
+	position: relative;
+    display: block;
+    padding: 10px 15px;
+    outline: none;
+    border: 0;
+    border-radius: 0;
+    width: 270px;
+    margin: 8px 0;
+    height: 22px;
+    color: #fff;
+	text-align: left;
+    background: url(input.png) repeat-y;
+}
+
+.welcome-panel form input::placeholder {
+   color:    #aaa;
+}
+
+.welcome-panel form .error {
+    font-size: 12px;
+    color: #c22;
+    height: 16px;
+    line-height: 16px;
+}
+
+.welcome-panel form h2 {
+	color: #eee;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+
+/*************************************/
+/* scrollbar                         */
+/*************************************/
+
+::-webkit-scrollbar { width: 25px; }
+::-webkit-scrollbar-thumb { background-color: rgb(32, 64, 64); }
+::-webkit-scrollbar-button { height: 25px; }
+::-webkit-scrollbar-button:vertical:increment { background: url(scrollbararrows.png) no-repeat 0 -25px;   }
+::-webkit-scrollbar-button:vertical:decrement { background: url(scrollbararrows.png) no-repeat 0  0;      }
+
+/*************************************/
+/* playlisty                         */
+/*************************************/
+
+side .logo {
+	background-image: url(tunefy-logo-side.png);
+    background-repeat: no-repeat;
+    height: 140px;
+    width: 100%;
+}
+
+side ol {
+    position: absolute;
+    top: 197px;
+    bottom: 0;
+    width: 100%;
+    overflow-y: auto;
+    list-style: none;
+    border-top: 1px solid #666;
+    background-color: rgb(8, 16, 16);
+}
+
+side ol li {
+    display: block;
+    height: 40px;
+    line-height: 40px;
+    padding-right: 20px;
+    padding-left:  40px;
+    font-weight: 400;
+    font-size: 15px;
+    color: rgb(64, 128, 128);
+    border-bottom: 1px solid #333;
+    transition: 0.2s linear;
+	cursor: pointer;
+	user-select: none;
+}
+
+side ol li:hover {
+    background-color: rgb(64, 128, 128);
+    color: #fff;
+}
+
+side ol li a { color: rgb(64, 128, 128); }
+side ol li:hover a { color: #fff; }
+side ol li:hover a:hover { color: #fff; text-decoration: underline; }
+
+/*************************************/
+/* odtwarzacz                        */
+/*************************************/
+
+.player-box {
+	position: relative;
+    width: 100%;
+    height: 94px;
+    background-color: rgb(24,48,48);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    z-index: 9;
+    border-bottom: 1px solid #ddd;
+    overflow: hidden;
+}
+
+.player-box .album-cover {
+    position: absolute;
+	width: 94px;
+    height: 94px;
+    display: block;
+    background: #000;
+}
+
+.player-box .player {
+	margin-left: 106px;
+    position: relative;
+    padding: 14px 10px 6px 0;
+}
+
+.player-box .controls {
+	position: relative;
+    width: 100%;
+    height: 40px;
+}
+
+.player-box .controls > div {
+	position: relative;
+	float: left;
+	height: 100%;
+}
+
+.player-box .song-info {
+    width: 320px;
+    overflow: hidden;
+    margin-left: 10px;
+}
+
+.player-box .song-info h4 {
+    font-weight: 300;
+    font-size: 18px;
+    letter-spacing: -0.25px;
+    position: absolute;
+    width: 100%;
+    top: -1px;
+}
+
+.player-box .song-info a {
+    font-size: 14px;
+    font-weight: 300;
+    color: #ccc;
+    bottom: 1px;
+    position: absolute;
+	cursor: pointer;
+}
+
+.player-box .song-info a:hover {
+	color: #ccc;
+	text-decoration: underline;
+	transiton: 0.2s linear;
+}
+
+.player-box .options,
+.player-box .volume {
+	float: right !important;
+}
+
+.player-box .button {
+	position: relative;
+	width: 37px;
+    height: 37px !important;
+    background-color: rgb(32,64,64);
+    border-radius: 20px;
+    float: left;
+    margin-left: 7px;
+    border: 1.5px solid #777;
+    cursor: pointer;
+	transition: 0.2s linear;
+}
+
+.player-box .button:first-child {
+    margin-left: 0;
+}
+
+.player-box .button:hover {
+    background-color: rgb(64,128,128);
+    border: 1.5px solid #ddd;
+}
+
+.player-box .time {
+    margin-top: 7px;
+}
+
+.player-box .time-bar,
+.player-box .volume-bar {
+	cursor: pointer;
+    height: 1.5px;
+}
+
+.player-box .time-bar {
+    position: relative;
+    width: 100%;
+    top: 5px;
+	margin-bottom: 12.5px;
+}
+
+.player-box .volume-bar {
+    position: absolute;
+	width: 180px;
+    top: 20px;
+    right: 0;
+}
+
+.player-box .time-bar .total,
+.player-box .time-bar .buffered,
+.player-box .time-bar .current,
+.player-box .volume-bar .total,
+.player-box .volume-bar .current  {
+	height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.player-box .time span {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: #ccc;
+}
+
+.player-box .volume {
+    width: 221px;
+    margin-left: 8px;
+}
+
+.player-box .volume #volume-icon {
+	height: 40px;
+    width: 40px;
+	background-image: url(icons.png);
+    background-position-y: 40px;
+}
+
+.player-box .volume #volume-icon[level="4"] { background-position-x:    0px; }
+.player-box .volume #volume-icon[level="3"] { background-position-x:  -40px; }
+.player-box .volume #volume-icon[level="2"] { background-position-x:  -80px; }
+.player-box .volume #volume-icon[level="1"] { background-position-x: -120px; }
+.player-box .volume #volume-icon[level="0"] { background-position-x: -160px; }
+
+.player-box .time-bar .total { background-color: #000; }
+.player-box .time-bar .buffered, .player-box .volume-bar .total { background-color: rgb(96, 128, 128); }
+.player-box .time-bar .current, .player-box .volume-bar .current  { background-color: #ccc; }
+
+.player-box .button[active] {
+	background-color: rgb(64,128,128);
+}
+
+.player-box .button:after {
+	content: '';
+	display: block;
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	background-image: url(icons.png);
+	opacity: 0.7;
+	transition: 0.2s linear;
+	top: -1.5px;
+    left: -1.5px;
+}
+
+.player-box .button:hover:after {
+	opacity: 1;
+}
+
+#play-button:after       { background-position:    0px 0; }
+#prev-track-button:after { background-position:  -40px 0; }
+#next-track-button:after { background-position:  -80px 0; }
+#shuffle-button:after    { background-position: -120px 0; }
+#repeat-button:after     { background-position: -160px 0; }
+
+input[type=text], input[type=number] {
+	display: block;
+    background-color: #fff;
+    border: 1.5px solid #60c0f0;
+    padding: 8px 14px;
+    outline: none;
+    border-radius: 10px;
+    width: 260px;
+    margin: 0 auto;
+    height: 22px;
+    margin-top: 30px;
+    color: rgba(0,0,64,0.55);
+	text-align: center;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type=radio], input[type=checkbox] {
+    -webkit-appearance: none;
+    display: block;
+    background-color: #60c0f0;
+    border: 2px solid #fff;
+    padding: 8.5px;
+    position: absolute;
+    outline: none;
+    top: 5px;
+    left: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+input[type=checkbox] {
+    border-radius: 5px;
+}
+input[type=radio] {
+    border-radius: 10px;
+}
+input:checked:after {
+    position: absolute;
+    color: #fff;
+    left: 1.5px;
+}
+input[type=radio]:checked:after {
+	content: '\25CF';
+    font-size: 22px;
+    top: -5px;
+}
+input[type=checkbox]:checked:after {
+	content: '\2714';
+    font-size: 18px;
+    top: -4px;
+}
+
+.loader {
+    border: 10px solid #fff;
+    border-radius: 50%;
+    border-top: 10px solid #60c0f0;
+    width: 80px;
+    height: 80px;
+    animation: spin 1.25s linear infinite;
+    margin: 145px auto 0;
+    box-shadow:
+		0 0 1px rgba(0,0,0,0.7),
+		inset 0 0 0.5px rgba(0,0,0,0.5);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+.search-bar {
+    z-index: 10;
+    position: absolute;
+    background-color: rgb(64, 128, 128);
+    top: 95px;
+    width: 100%;
+    height: 39px;
+    border-bottom: 1px solid #ddd;
+}
+
+#search-form {
+    position: absolute;
+    width: 330px;
+}
+
+#add-playlist-form {
+    position: absolute;
+    width: 100%;
+    top: 160px;
+    height: 37px;
+    border-bottom: 1px solid #333;
+}
+
+#search-form input, #add-playlist-form input {
+    margin: 0;
+    border: 0;
+    outline: none;
+    float: left;
+}
+
+#search-form input {
+    margin: 1px;
+}
+
+#search-form input[type=text], #add-playlist-form input[type=text] {
+    padding: 7px 12px 8px;
+    border-radius: 0;
+    width: 255px;
+    height: 22px;
+    color: rgb(8, 32, 32);
+    text-align: left;
+}
+
+#add-playlist-form input[type=text] {
+    width: 218px;
+}
+
+#search-form input[type=submit], #add-playlist-form input[type=submit] {
+    width: 37px;
+    height: 37px;
+    margin-left: 0;
+}
+
+.user-panel {
+    height: 39px;
+    float: right;
+    line-height: 37.5px;
+    margin-right: 10px;
+}
+
+.user-panel a {
+    margin-left: 8px;
+    color: #fff;
+}
+
+.user-panel a:hover {
+    text-decoration: underline;
+}

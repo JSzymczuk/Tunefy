@@ -1,0 +1,36 @@
+{% extends 'tunefy_cms/layout.html' %}
+
+{% block page_headline %}
+    <h2>{% block title %}Użytkownicy{% endblock %}</h2>
+{% endblock %}
+
+{% block content %}
+
+    {% if results %}
+
+        {% include 'tunefy_cms/pagination.html' with url_action='genre.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
+
+        <table>
+            {% for u in results %}
+                <tr>
+                    <td>{{ first_index|add:forloop.counter }}</td>
+                    <td>{{ u.username }}</td>
+                    <td>
+                        {% if user != u %}
+                            <a href="{% url 'user.edit'   u.id %}">
+                                {% if u.is_staff %}Pozbaw uprawnień{% else %}Dodaj uprawnienia{% endif %}
+                            </a>
+                        {% endif %}
+                    </td>
+                    <td><a href="{% url 'user.delete' u.id %}">Usuń</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        {% include 'tunefy_cms/pagination.html' with url_action='genre.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
+
+    {% else %}
+        <h2>Brak zarejestrowanych użytkowników.</h2>
+    {% endif %}
+
+{% endblock %}

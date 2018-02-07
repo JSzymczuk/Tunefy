@@ -1,6 +1,7 @@
 from django.db.models import Model, CharField, ForeignKey, IntegerField, CASCADE, ManyToManyField, \
     PositiveSmallIntegerField, ImageField, FileField, DateField
 from tunefy_cms.file_manager import create_thumb, path_and_rename, wrapper
+from django.contrib.auth.models import User
 import datetime
 
 
@@ -44,7 +45,6 @@ class Artist(ImageThumbModel):
 
 class Song(Model):
     title = CharField(max_length=64)
-    #artist = ForeignKey(Artist, on_delete=CASCADE, related_name='artist+')
     artists = ManyToManyField(Artist, blank=True, related_name='artists+')
     audio = FileField(upload_to=path_and_rename('songs'), blank=True)
     #audio = FileField(blank=True)
@@ -90,10 +90,5 @@ class PlaylistElement(Model):
 
 class Playlist(Model):
     name = CharField(max_length=64)
-    # owner
-
-
-
-
-
-
+    owner = ForeignKey(User, on_delete=CASCADE, null=True)
+#

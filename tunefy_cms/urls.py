@@ -1,13 +1,9 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
-from tunefy_cms.views import artist, genre, home, song, album
+from tunefy_cms.views import artist, genre, home, song, album, user
 
 urlpatterns = [
-    # path('articles/2003/', views.special_case_2003),
-    # path('articles/<int:year>/', views.year_archive),
-    # path('articles/<int:year>/<int:month>/', views.month_archive),
-    # path('articles/<int:year>/<int:month>/<slug:slug>/', views.article_detail),
 
     path('album/', album.index, name='album.index'),
     path('album/<int:page_number>/', album.index, name='album.index'),
@@ -37,5 +33,11 @@ urlpatterns = [
     path('song/edit/<id>/',      song.edit,      name='song.edit'),
     path('song/delete/<id>/',    song.delete,    name='song.delete'),
 
-    path('', home.index)
+    path('user/',                                   user.index,  name='user.index'  ),
+    path('user/<int:page_number>/',                 user.index,  name='user.index'  ),
+    path('user/<int:page_size>/<int:page_number>/', user.index,  name='user.index'  ),
+    path('user/edit/<id>/',                         user.edit,   name='user.edit'   ),
+    path('user/delete/<id>/',                       user.delete, name='user.delete' ),
+
+    path('', home.index, name='cms')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

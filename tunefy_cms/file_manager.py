@@ -2,6 +2,8 @@ import os
 from PIL import ImageOps, Image
 from io import BytesIO
 from datetime import datetime
+
+from django.contrib.admin.views.decorators import staff_member_required
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 from tunefy import settings

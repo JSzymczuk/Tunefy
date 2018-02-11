@@ -19,7 +19,7 @@
     <ol class="albums">
     {% for album in albums %}
         <li>
-            <a href="{% url 'track.play' 0 album.id %}" class="play-button"></a>
+            <a href="{% url 'album.play' album.id %}" class="play-button"></a>
             {% if album.image %}
                 <a href="{% url 'album' album.id %}" class="album-cover">
                     <img src="{{ album.thumb.url }}" alt="{{ album.name }}">

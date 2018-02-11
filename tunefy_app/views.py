@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from django.template import loader
 from django.urls import reverse
 from tunefy_cms.models import Song, Track, Artist, Album, Playlist, PlaylistElement
 from mutagen.mp3 import MP3
@@ -12,13 +13,20 @@ from mutagen.mp3 import MP3
 
 @login_required(redirect_field_name=None)
 def index(request):
-    return render(request, 'tunefy_app/index.html', {})
+    l = loader.get_template('tunefy_app/index.html')
+    response = HttpResponse(l.render({}, request))
+    response.delete_cookie("current_playlist")
+    response.delete_cookie("track")
+    response.delete_cookie("album")
+    response.delete_cookie("playlist")
+    return response
 
 
 @login_required(redirect_field_name=None)
 def search(request):
-    if request.method == 'POST':
-        phrase = request.POST.get('phrase', '').lower()
+    # if request.method == 'POST':
+    #     phrase = request.POST.get('phrase', '').lower()
+        phrase = request.GET.get('phrase', '').lower()
         tracks = [t for t in Track.objects.all() if phrase in t.song.title.lower()]
         albums = [a for a in Album.objects.all() if phrase in a.name.lower()]
         artists = [a for a in Artist.objects.all() if phrase in a.name.lower()]
@@ -27,8 +35,8 @@ def search(request):
             'albums': albums,
             'artists': artists
         })
-    else:
-        return render(request, 'tunefy_app/search.html', {})
+    # else:
+    #     return render(request, 'tunefy_app/search.html', {})
 
 
 @login_required(redirect_field_name=None)
@@ -128,11 +136,13 @@ def remove_track(request, id):
 
 
 @login_required(redirect_field_name=None)
-def play_track(request, track_id, playlist_id=None, album_id=None):
+def play_track(request, track_id):
     track = Track.objects.filter(id=track_id).first()
-    if track != None and track.song != None and track.song.audio != None:
+    if track is not None and track.song is not None and track.song.audio is not None:
         response = HttpResponseRedirect(reverse('track.play'))
         response.set_cookie("track", track_id)
+        response.delete_cookie("album")
+        response.delete_cookie("playlist")
         return response
     return render(request, 'tunefy_app/player.html', {
         'track': None
@@ -140,8 +150,59 @@ def play_track(request, track_id, playlist_id=None, album_id=None):
 
 
 @login_required(redirect_field_name=None)
+def play_album(request, album_id, track_id=-1):
+    album = Album.objects.filter(id=album_id).first()
+    if album is not None:
+        if int(track_id) < 0:
+            track = Track.objects.filter(album_id=album).order_by('order').first()
+        else:
+            track = Track.objects.filter(id=track_id).first()
+        if track is not None\
+                and track.album_id is album.id\
+                and track.song is not None\
+                and track.song.audio is not None:
+            response = HttpResponseRedirect(reverse('track.play'))
+            response.set_cookie("track", track.id)
+            response.set_cookie("album", album.id)
+            response.delete_cookie("playlist")
+            return response
+    return render(request, 'tunefy_app/player.html', {
+        'track': None
+    })
+
+
+@login_required(redirect_field_name=None)
+def play_playlist(request, playlist_id, element_id=-1):
+    playlist = Playlist.objects.filter(id=playlist_id).first()
+    if playlist is not None:
+        if int(element_id) < 0:
+            element = PlaylistElement.objects.filter(playlist=playlist).order_by('order').first()
+        else:
+            element = PlaylistElement.objects.filter(id=element_id).first()
+        if element is not None\
+                and element.track is not None\
+                and element.track.song is not None\
+                and element.track.song.audio is not None:
+            response = HttpResponseRedirect(reverse('track.play'))
+            response.set_cookie("track", element.id)
+            response.delete_cookie("album")
+            response.set_cookie("playlist", playlist.id)
+            return response
+    return render(request, 'tunefy_app/player.html', {
+        'track': None
+    })
+
+
+@login_required(redirect_field_name=None)
 def get_track(request):
-    track = Track.objects.filter(id=request.COOKIES.get('track')).first()
+    if 'track' not in request.COOKIES:
+        return render(request, 'tunefy_app/player.html', {
+            'track': None
+        })
+    if 'playlist' in request.COOKIES:
+        track = PlaylistElement.objects.filter(id=request.COOKIES.get('track')).first().track
+    else:
+        track = Track.objects.filter(id=request.COOKIES.get('track')).first()
     audio = MP3(track.song.audio)
     try:
         len = audio.info.length
@@ -159,8 +220,60 @@ def get_track(request):
 
 
 @login_required(redirect_field_name=None)
+def play_next(request):
+    response = HttpResponseRedirect(reverse('track.play'))
+    if 'track' in request.COOKIES:
+        #if track is not None:
+        try:
+            if 'album' in request.COOKIES:
+                album = Album.objects.filter(id=request.COOKIES.get('album')).first()
+                track = Track.objects.filter(id=request.COOKIES.get('track')).first()
+                next_track = Track.objects.filter(album=album, order__gt=track.order).order_by('order').first()
+                response.set_cookie("track", next_track.id)
+            elif 'playlist' in request.COOKIES:
+                #playlist = Playlist.objects.filter(id=request.COOKIES.get('playlist')).first()
+                element = PlaylistElement.objects.filter(id=request.COOKIES.get('track')).first()
+                #element = PlaylistElement.objects.filter(playlist=playlist, track=track).order_by('order').first()
+                next_element = PlaylistElement.objects.filter(playlist=element.playlist, order__gt=element.order)\
+                    .order_by('order').first()
+                response.set_cookie("track", next_element.id)
+            else:
+                response.delete_cookie("track")
+        except:
+            response.delete_cookie("track")
+        return response
+    response.delete_cookie("track")
+    return response
+
+
+@login_required(redirect_field_name=None)
+def play_prev(request):
+    response = HttpResponseRedirect(reverse('track.play'))
+    if 'track' in request.COOKIES:
+        #if track is not None:
+        try:
+            if 'album' in request.COOKIES:
+                album = Album.objects.filter(id=request.COOKIES.get('album')).first()
+                track = Track.objects.filter(id=request.COOKIES.get('track')).first()
+                next_track = Track.objects.filter(album=album, order__lt=track.order).order_by('-order').first()
+                response.set_cookie("track", next_track.id)
+            elif 'playlist' in request.COOKIES:
+                element = PlaylistElement.objects.filter(id=request.COOKIES.get('track')).first()
+                prev_element = PlaylistElement.objects.filter(playlist=element.playlist, order__lt=element.order)\
+                    .order_by('-order').first()
+                response.set_cookie("track", prev_element.id)
+            else:
+                response.delete_cookie("track")
+        except:
+            response.delete_cookie("track")
+        return response
+    response.delete_cookie("track")
+    return response
+
+
+@login_required(redirect_field_name=None)
 def set_volume(request, volume):
-    volume = min(1, max(0, float(volume)));
+    volume = min(1, max(0, float(volume)))
     response = HttpResponse('Volume changed to 0.')
     response.set_cookie('volume', volume)
     return response

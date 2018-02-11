@@ -16,10 +16,14 @@ urlpatterns = [
     path('account/',          include('django.contrib.auth.urls')),
     path('account/register/', views.register, name='register'    ),
 
-    path('play/<track_id>/<playlist_id>/<album_id>/', views.play_track, name='track.play'),
-    path('play/<track_id>/<playlist_id>/',            views.play_track, name='track.play'),
-    path('play/<track_id>/',                          views.play_track, name='track.play'),
-    path('play/',                                     views.get_track,  name='track.play'),
+    path('play/playlist/<playlist_id>/<element_id>/', views.play_playlist, name='playlist.play' ),
+    path('play/playlist/<playlist_id>/',              views.play_playlist, name='playlist.play' ),
+    path('play/album/<album_id>/<track_id>/',         views.play_album,    name='album.play'    ),
+    path('play/album/<album_id>/',                    views.play_album,    name='album.play'    ),
+    path('play/track/<track_id>/',                    views.play_track,    name='track.play'    ),
+    path('play/prev/',                                views.play_prev,     name='play.prev'     ),
+    path('play/next/',                                views.play_next,     name='play.next'     ),
+    path('play/',                                     views.get_track,     name='track.play'    ),
 
     path('settings/volume/<volume>/', views.set_volume, name='volume.set'),
 

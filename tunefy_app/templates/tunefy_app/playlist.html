@@ -8,7 +8,7 @@
             {% for element in elements %}
                 <li>
                     <span class="order">{{ element.order|add:1 }}</span>
-                    <a href="{% url 'track.play' element.track.id playlist.id %}" class="play-button"></a>
+                    <a href="{% url 'playlist.play' playlist.id element.id %}" class="play-button"></a>
                     {% if element.track.album.image %}
                         <a href="{% url 'album' element.track.album.id %}" class="album-cover">
                             <img src="{{ element.track.album.thumb.url }}" alt="{{ element.track.album.name }}">

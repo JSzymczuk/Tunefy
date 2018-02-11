@@ -1,5 +1,5 @@
 {% if track %}
-
+    <div id="track-buffering"></div>
     <a href='{% url 'album' track.album.id %}' class='album-cover'>
         <img src='{{ track.album.thumb.url }}' alt=''>
     </a>
@@ -23,10 +23,10 @@
                     <div class='current' style="width: {{ volume }}"></div>
                 </div>
             </div>
-            <div class='options'>
-                <div id='shuffle-button' class='button'></div>
-                <div id='repeat-button'  class='button'></div>
-            </div>
+{#            <div class='options'>#}
+{#                <div id='shuffle-button' class='button'></div>#}
+{#                <div id='repeat-button'  class='button'></div>#}
+{#            </div>#}
         </div>
         <div class='time'>
             <div class='time-bar'>
@@ -51,17 +51,20 @@
             playTrack();
             setVolume({{ volume }});
 
-            $('.time-bar').on('click', function (e) {
-               var progress = (e.pageX - $(this).offset().left) / $(this).width();
-               var player = $('#player-audio').get(0);
-               playTrack();
-               player.currentTime = Math.max(0, Math.min(1, progress)) * player.duration;
+            $(document).on('click', '.time-bar', function (e) {
+                var progress = (e.pageX - $(this).offset().left) / $(this).width();
+                var player = $('#player-audio').get(0);
+                var currentTime = parseFloat(Math.max(0, Math.min(1, progress)) * player.duration);
+                playTrack(function() {
+                    //player.play().then(function () {
+                        player.currentTime = currentTime;
+                    //});
+                });
             });
 
             $('.volume-bar').on('click', function (e) {
-               setVolume((e.pageX - $(this).offset().left) / $(this).width());
+                setVolume((e.pageX - $(this).offset().left) / $(this).width());
             });
         });
     </script>
-
 {% endif %}

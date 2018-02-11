@@ -16,7 +16,7 @@
                 <li>
                     <a href="{% url 'playlist.select' playlist.id %}" class="select-playlist-link"></a>
             {% endif %}
-                    <a href="{% url 'track.play' playlist.id %}" class="play-button"></a>
+                    <a href="{% url 'playlist.play' playlist.id %}" class="play-button"></a>
                     <a href="{% url 'playlist.index' playlist.id %}" class="playlist-link">{{ playlist.name }}</a>
     {#                <a href="{% url 'playlist.delete' playlist.id %}" class="delete-playlist-link">D</a>#}
                 </li>

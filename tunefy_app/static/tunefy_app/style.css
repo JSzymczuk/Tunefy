@@ -908,3 +908,11 @@ a.play-button:hover { opacity: 1; }
 }
 .album-info h3 { clear: none; }
 .album-info h4 a { color: #ccc; }
+
+#track-buffering {
+    position: absolute;
+    width: 94px;
+    height: 94px;
+    z-index: 1;
+    background-color: rgba(0,0,0,0.8);
+}

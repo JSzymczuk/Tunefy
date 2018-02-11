@@ -21,7 +21,7 @@
         <ol class="tracks">
             {% for track in tracks %}
                 <li>
-                    <a href="{% url 'track.play' track.song.id 0 album.id %}" class="play-button"></a>
+                    <a href="{% url 'album.play' album.id track.id %}" class="play-button"></a>
                     <div class="track-info">
                         <span>{{ track.song.title }}</span>
                         <div class="artists">

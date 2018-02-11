@@ -23,7 +23,7 @@
 		</div>
 
         <div id='search' class='search-bar'>
-            <form id="search-form" method="post" action="{% url 'search' %}">
+            <form id="search-form" method="get">
                 {% csrf_token %}
                 <input name="phrase" type="text" placeholder="Wpisz tytuł utworu, albumu lub wykonawcę"/>
                 <input type="submit" value="Szukaj"/>
@@ -60,10 +60,20 @@
         $(document).ready(function() {
             $.ajax({
                 url: "{% url 'playlist.index' %}",
-                type: "get",
-                dataType: "html",
                 success: function (response) {
                     $('#playlists').html(response);
+                }
+            });
+            $.ajax({
+                url: "{% url 'search' %}",
+                success: function (response) {
+                    $('#current-content').html(response);
+                }
+            });
+            $.ajax({
+                url: "{% url 'track.play' %}",
+                success: function (response) {
+                    $('#player').html(response);
                 }
             });
         });
@@ -85,7 +95,7 @@
             event.preventDefault();
             $.ajax({
                 url: "{% url 'search' %}",
-                type: "post",
+                type: "get",
                 dataType: "html",
                 data: $(this).serialize(),
                 success: function (response) {
@@ -117,7 +127,23 @@
             });
         });
 
-        $(document).on('click', '#playlists a.playlist-link.play-button,'
+        $(document).on('click', '.remove-playlist-link', function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: $(this).attr('href'),
+                success: function (response) {
+                    $('#playlists').html(response);
+                }
+            });
+            $.ajax({
+                url: "{% url 'search' %}",
+                success: function (response) {
+                    $('#current-content').html(response);
+                }
+            });
+        });
+
+        $(document).on('click', '#playlists a.play-button,'
             + '#current-content a.play-button', function(event) {
             event.preventDefault();
             $.ajax({
@@ -141,6 +167,26 @@
             }
         });
 
+        $(document).on('click', '#prev-track-button', function() {
+            event.preventDefault();
+            $.ajax({
+                url: "{% url 'play.prev' %}",
+                success: function (response) {
+                    $('#player').html(response);
+                }
+            });
+        });
+
+        $(document).on('click', '#next-track-button', function() {
+            event.preventDefault();
+            $.ajax({
+                url: "{% url 'play.next' %}",
+                success: function (response) {
+                    $('#player').html(response);
+                }
+            });
+        });
+
         $(document).on('click', '#current-content a.add-button', function(event) {
             event.preventDefault();
             $.ajax({
@@ -148,18 +194,18 @@
             });
         });
 
-        $(document).on('click', '.remove-playlist-link', function(event) {
-            event.preventDefault();
-            $.ajax({
-                url: $(this).attr('href'),
-                success: function () {
-                    location.reload();
-                }
-            });
-        });
+        function playTrack(callback) {
+            var promise = $('#player-audio').get(0).play();
 
-        function playTrack() {
-            $('#player-audio').get(0).play();
+            promise.then(function () {
+                $('#track-buffering').hide();
+                if (callback && typeof callback === "function") {
+                    callback();
+                }
+            }).catch(function () {
+                console.log("Play interrupted on user's request.");
+            });
+
             $('#play-button').attr('playing', '');
         }
 

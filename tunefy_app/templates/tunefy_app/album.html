@@ -1,37 +1,40 @@
 
 {% if album %}
 
-    <h1>{{ album.name }}</h1>
-    <h4><a href="{% url 'artist' album.artist.id %}">{{ album.artist }}</a></h4>
-    {{ album.date_released|date:'Y' }}
+    <div class="album-info">
+        {% if album.image %}
+            <a href="{{ album.image.url }}" class="album-cover view-image-link">
+                <img src="{{ album.thumb.url }}" alt="{{ album.name }}">
+            </a>
+        {% endif %}
+
+        <h3>{{ album.name }}</h3>
+        <h4><a href="{% url 'artist' album.artist.id %}">{{ album.artist }}</a></h4>
+        {{ album.date_released|date:'Y' }}
+    </div>
 
 {#        {% for genre in album.genres %}#}
 {#            {{ genre }}#}
 {#        {% endfor %}#}
 
-    {% if album.image %}
-        <a href="{{ album.image.url }}">
-            <img src="{{ album.thumb.url }}" alt="{{ album.name }}">
-        </a>
-    {% endif %}
-
     {% if tracks %}
-        <ol>
+        <ol class="tracks">
             {% for track in tracks %}
                 <li>
-                    <a class="play-button" href="{% url 'track.play' track.id None album.id %}">Play</a>
-                    <div>
-                        {{ track.song.title }}
-                        {% for artist in track.song.artists.all %}
-                            <a href="{% url 'artist' artist.id %}">{{ artist }}</a>
-                        {% endfor %}
+                    <a href="{% url 'track.play' track.song.id 0 album.id %}" class="play-button"></a>
+                    <div class="track-info">
+                        <span>{{ track.song.title }}</span>
+                        <div class="artists">
+                            {% for artist in track.song.artists.all %}
+                                <a href="{% url 'artist' artist.id %}">{{ artist }}</a>{% if forloop.counter < track.song.artists.all|length %}, {% endif %}
+                            {% endfor %}
+                        </div>
                     </div>
-                    <a href="{% url 'playlist.add_element' track.id %}">A</a>
+                    <a href="{% url 'playlist.add_element' track.id %}" class="add-button"></a>
                 </li>
             {% endfor %}
         </ol>
     {% endif %}
-
 {% else %}
     <h3>Nie znaleziono albumu</h3>
 {% endif %}

@@ -21,7 +21,7 @@ class ThumbModelForm(ModelForm):
 class CreateArtistForm(ThumbModelForm):
     class Meta:
         model = Artist
-        fields = ['name', 'image']
+        fields = ['name', 'image', 'description']
 
 
 class CreateSongForm(ModelForm):

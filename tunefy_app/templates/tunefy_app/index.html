@@ -105,8 +105,8 @@
         });
 
         $(document).on('click', '#playlists a.playlist-link:not(.play-button),'
-            + '#current-content a:not(.play-button), #player a.album-cover,'
-            + '#player .artists a', function(event) {
+            + '#current-content a:not(.play-button):not(.add-button):not(.remove-playlist-link):not(.view-image-link),'
+            + '#player a.album-cover, #player .artists a', function(event) {
 
             event.preventDefault();
             $.ajax({
@@ -139,6 +139,23 @@
                     playTrack();
                 }
             }
+        });
+
+        $(document).on('click', '#current-content a.add-button', function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: $(this).attr('href')
+            });
+        });
+
+        $(document).on('click', '.remove-playlist-link', function(event) {
+            event.preventDefault();
+            $.ajax({
+                url: $(this).attr('href'),
+                success: function () {
+                    location.reload();
+                }
+            });
         });
 
         function playTrack() {

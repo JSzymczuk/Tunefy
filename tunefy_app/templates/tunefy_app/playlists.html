@@ -9,18 +9,17 @@
 
     <ol>
         {% for playlist in playlists %}
-            <li>
-                <a href="{% url 'playlist.index' playlist.id %}" class="playlist-link">
-                    {{ playlist.name }}
-                </a>
 
-                {% if current_playlist == playlist.id %}
-
-                {% else %}
-                    <a href="{% url 'playlist.select' playlist.id %}" class="select-playlist-link">A</a>
-                {% endif %}
-                <a href="{% url 'playlist.delete' playlist.id %}" class="delete-playlist-link">D</a>
-            </li>
+            {% if current_playlist == playlist.id %}
+                <li active>
+            {% else %}
+                <li>
+                    <a href="{% url 'playlist.select' playlist.id %}" class="select-playlist-link"></a>
+            {% endif %}
+                    <a href="{% url 'track.play' playlist.id %}" class="play-button"></a>
+                    <a href="{% url 'playlist.index' playlist.id %}" class="playlist-link">{{ playlist.name }}</a>
+    {#                <a href="{% url 'playlist.delete' playlist.id %}" class="delete-playlist-link">D</a>#}
+                </li>
         {% endfor %}
     </ol>
 

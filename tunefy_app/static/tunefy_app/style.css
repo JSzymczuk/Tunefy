@@ -34,7 +34,7 @@ footer {
 side {
     width: 279px;
     top: 0;
-    background-color: rgb(8,32,32);
+    background-color: rgb(8, 32, 32);
     border-right: 1px solid #ddd;
     z-index: 99;
 }
@@ -47,8 +47,10 @@ nav {
 
 main {
 	top: 135px;
+    padding: 20px;
 	right: 0;
     overflow-y: auto;
+    color: #ccc;
 }
 
 p {
@@ -167,19 +169,22 @@ a:hover { color: #fff; }
 	margin: 0 auto;
 }
 
-.welcome-panel form input[type=text], .welcome-panel form input[type=password] {
-	position: relative;
-    display: block;
+input[type=text], input[type=password], input[type=number] {
+    color: #fff;
+    background: #405050;
+    letter-spacing: 1px;
+    border: 1.5px solid #fff;
+    text-align: left;
+    border-radius: 0;
+    height: 22px;
     padding: 10px 15px;
     outline: none;
-    border: 0;
-    border-radius: 0;
+}
+
+.welcome-panel form input[type=text], .welcome-panel form input[type=password] {
+    position: relative;
     width: 270px;
     margin: 8px 0;
-    height: 22px;
-    color: #fff;
-	text-align: left;
-    background: url(input.png) repeat-y;
 }
 
 .welcome-panel form input::placeholder {
@@ -224,21 +229,20 @@ side .logo {
 
 side ol {
     position: absolute;
-    top: 197px;
+    top: 201px;
     bottom: 0;
     width: 100%;
     overflow-y: auto;
     list-style: none;
-    border-top: 1px solid #666;
     background-color: rgb(8, 16, 16);
 }
 
 side ol li {
     display: block;
     height: 40px;
-    line-height: 40px;
+    line-height: 41.5px;
     padding-right: 20px;
-    padding-left:  40px;
+    /*padding-left:  40px;*/
     font-weight: 400;
     font-size: 15px;
     color: rgb(64, 128, 128);
@@ -246,6 +250,7 @@ side ol li {
     transition: 0.2s linear;
 	cursor: pointer;
 	user-select: none;
+    position: relative;
 }
 
 side ol li:hover {
@@ -256,6 +261,23 @@ side ol li:hover {
 side ol li a { color: rgb(64, 128, 128); }
 side ol li:hover a { color: #fff; }
 side ol li:hover a:hover { color: #fff; text-decoration: underline; }
+
+side ol .select-playlist-link {
+    width: 100%;
+    display: block;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+}
+side ol .playlist-link, side ol .play-button {
+    z-index: 2;
+    position: relative;
+}
+
+side ol li[active] a {
+    font-weight: 600 !important;
+    color: #ddd;
+}
 
 /*************************************/
 /* odtwarzacz                        */
@@ -283,6 +305,7 @@ side ol li:hover a:hover { color: #fff; text-decoration: underline; }
 
 .player-box .album-cover img {
     height: 100%;
+    border-right: 1px solid #ddd;
 }
 
 .player-box .player {
@@ -298,13 +321,13 @@ side ol li:hover a:hover { color: #fff; text-decoration: underline; }
 }
 
 .player-box .controls > div {
-	position: relative;
-	float: left;
-	height: 100%;
+    position: relative;
+    float: left;
+    height: 100%;
 }
 
 .player-box .song-info {
-    width: 320px;
+    max-width: 320px;
     overflow: hidden;
     margin-left: 10px;
 }
@@ -313,25 +336,29 @@ side ol li:hover a:hover { color: #fff; text-decoration: underline; }
     font-weight: 300;
     font-size: 18px;
     letter-spacing: -0.25px;
-    position: absolute;
+    position: relative;
     width: 100%;
-    top: -1px;
+    top: 1px;
 }
 
 .player-box .song-info .artists {
 	color: #ccc;
     font-size: 14px;
     font-weight: 300;
-    bottom: 1px;
-    position: absolute;
+    bottom: -2px;
+    position: relative;
 }
 
-.player-box .song-info .artists a {
+.player-box .song-info .artists a,
+main .albums li > :nth-child(3) .artists a,
+main .tracks .track-info > :nth-child(2) a {
     color: #ccc;
 	cursor: pointer;
 }
 
-.player-box .song-info .artists a:hover {
+.player-box .song-info .artists a:hover,
+main .albums li > :nth-child(3) .artists a:hover,
+main .tracks .track-info > :nth-child(2) a:hover {
     color: #ccc;
 	text-decoration: underline;
 }
@@ -417,7 +444,7 @@ side ol li:hover a:hover { color: #fff; text-decoration: underline; }
 	height: 40px;
     width: 40px;
 	background-image: url(icons.png);
-    background-position-y: 40px;
+    background-position-y: -40px;
 }
 
 .player-box .volume #volume-icon[level="4"] { background-position-x:    0px; }
@@ -458,20 +485,20 @@ side ol li:hover a:hover { color: #fff; text-decoration: underline; }
 #shuffle-button:after       { background-position: -160px 0; }
 #play-button[playing]:after { background-position: -200px 0; }
 
-input[type=text], input[type=number] {
-	display: block;
-    background-color: #fff;
-    border: 1.5px solid #60c0f0;
-    padding: 8px 14px;
-    outline: none;
-    border-radius: 10px;
-    width: 260px;
-    margin: 0 auto;
-    height: 22px;
-    margin-top: 30px;
-    color: rgba(0,0,64,0.55);
-	text-align: center;
-}
+/*input[type=text], input[type=number] {*/
+	/*display: block;*/
+    /*background-color: #fff;*/
+    /*border: 1.5px solid #60c0f0;*/
+    /*padding: 8px 14px;*/
+    /*outline: none;*/
+    /*border-radius: 10px;*/
+    /*width: 260px;*/
+    /*margin: 0 auto;*/
+    /*height: 22px;*/
+    /*margin-top: 30px;*/
+    /*color: rgba(0,0,64,0.55);*/
+	/*text-align: center;*/
+/*}*/
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -543,15 +570,16 @@ input[type=checkbox]:checked:after {
 
 #search-form {
     position: absolute;
-    width: 330px;
+    width: 356px;
 }
 
 #add-playlist-form {
     position: absolute;
     width: 100%;
     top: 160px;
-    height: 37px;
-    border-bottom: 1px solid #333;
+    height: 39px;
+    border-bottom: 1px solid #ddd;
+    border-top: 1px solid #ddd;
 }
 
 #search-form input, #add-playlist-form input {
@@ -561,33 +589,39 @@ input[type=checkbox]:checked:after {
     float: left;
 }
 
-#search-form input {
-    margin: 1px;
-}
-
 #search-form input[type=text], #add-playlist-form input[type=text] {
-    padding: 7px 12px 8px;
-    border-radius: 0;
-    width: 255px;
-    height: 22px;
-    color: rgb(8, 32, 32);
-    text-align: left;
+    padding: 9px 12px 8px;
+    width: 293px;
 }
 
 #add-playlist-form input[type=text] {
-    width: 218px;
+    width: 216px;
 }
 
 #search-form input[type=submit], #add-playlist-form input[type=submit] {
-    width: 37px;
-    height: 37px;
-    margin-left: 0;
+    width: 39px;
+    height: 39px;
+    cursor: pointer;
+    background-color: #d0a600;
+    background-image: url(icons.png);
+    text-indent: 9999px;
+    background-position-x: -41px;
+    background-position-y: -79px;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    transition: 0.2s linear;
 }
+
+#search-form input[type=submit]:hover,
+#add-playlist-form input[type=submit]:hover {
+    background-color: #ffcc00;
+}
+#add-playlist-form input[type=submit] { background-position-x: -81px; }
 
 .user-panel {
     height: 39px;
     float: right;
-    line-height: 37.5px;
+    line-height: 39.5px;
     margin-right: 10px;
 }
 
@@ -599,3 +633,278 @@ input[type=checkbox]:checked:after {
 .user-panel a:hover {
     text-decoration: underline;
 }
+
+/******************************************************/
+/* MAIN                                               */
+/******************************************************/
+
+main h2, main h3 {
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: #eee;
+    clear: both;
+}
+
+main h2 { margin-bottom: 10px; }
+
+main ol {
+    overflow: hidden;
+    border-bottom: 1px solid #405050;
+    border-top: 1px solid #405050;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    clear: both;
+}
+
+main a {
+    color: #fff;
+}
+
+main a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+main p {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 25px;
+    text-align: justify;
+    line-height: 20px;
+}
+
+main ol.artists { padding-top: 10px; }
+
+main .artists li {
+    list-style: none;
+    display: block;
+    float: left;
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    border-bottom: 0;
+}
+
+main .artists li a {
+    display: block;
+    position: absolute;
+    width: 158px;
+    height: 158px;
+    top: 0;
+    border: 1px solid #ddd;
+    z-index: 3;
+}
+
+main .artists li * { transition: 0.2s linear; }
+
+main .artists li img {
+    position: absolute;
+    width: 160px;
+    top: 0;
+    left: 0;
+}
+
+main .artists li h5 {
+    position: absolute;
+    text-transform: uppercase;
+    bottom: 8px;
+    width: 144px;
+    text-align: center;
+    letter-spacing: 2px;
+    font-size: 11px;
+    font-weight: 300;
+    z-index: 2;
+    padding: 0 8px;
+    color: #fff;
+}
+
+main .artists li:before {
+    content: '';
+    z-index: 1;
+    position: absolute;
+    display: block;
+    bottom: 1px;
+    left: 1px;
+    width: 158px;
+    height:  60px;
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8));
+}
+
+main .artists li:hover a {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+main .artists li:hover img {
+    width: 180px;
+    top: -10px;
+    left: -10px;
+}
+
+main .artists li:hover h5 {
+    letter-spacing: 3px;
+}
+
+main ol li {
+    list-style: none;
+    display: block;
+    transition: 0.2s linear;
+    color: #ddd;
+    border-bottom: 1px solid #333;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+main ol li:hover { background-color: rgb(64, 128, 128); }
+main ol li:last-of-type { border-bottom: 0; }
+
+main .albums li {
+    height: 64px;
+}
+
+main .albums li > a img {
+    border-right: 1px solid #333;
+    border-left: 1px solid #333;
+    height: 100%;
+}
+.album-info .album-cover,
+main .albums li > .album-cover,
+main .tracks li > .album-cover {
+    overflow: hidden;
+    display: block;
+    height: 64px;
+    float: left;
+    position: relative;
+}
+main .tracks li > .album-cover {
+    height: unset;
+    margin-right: 10px;
+}
+.album-info .album-cover:after,
+main .albums li > .album-cover:after,
+main .tracks li > .album-cover:after {
+    position: absolute;
+    content: '';
+    display: block;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 1;width: 100%;
+    height: 100%;
+    top: 0;
+    transition: 0.2s linear;
+    opacity: 0;
+}
+.album-info .album-cover:hover:after,
+main .albums li > .album-cover:hover:after,
+main .tracks li > .album-cover:hover:after {
+    background-color: rgba(255, 255, 255, 0.2);
+    opacity: 1;
+}
+.album-info .album-cover {
+    border: 1px solid #ddd;
+    float: left;
+    margin-right: 10px;
+    height: 158px;
+    width: 158px;
+}
+
+main .albums li > :nth-child(3) {
+    float: left;
+    font-size: 12px;
+    padding: 6px 0 0 10px;
+    line-height: 18px;
+}
+main .albums li > :nth-child(3) > :nth-child(1) {
+    font-size: 14px;
+}
+main .albums li > :nth-child(3) .artists {
+    overflow: hidden;
+    height: 18px;
+    margin-top: 1px;
+}
+
+main .tracks li {
+    height: 40px;
+    line-height: 20px;
+    overflow: hidden;
+}
+
+.add-button, .remove-button {
+    height: 40px;
+    width: 40px;
+    background-image: url(icons.png);
+    background-position-x: -200px;
+    background-position-y: -40px;
+    opacity: 0.3;
+    cursor: pointer;
+    transition: 0.2s linear;
+    position: absolute;
+    right: 20px;
+}
+.add-button:hover, .remove-button:hover { opacity: 1; }
+.remove-button {
+    background-position-x: 0;
+    background-position-y: -80px;
+}
+
+main .tracks .track-info {
+    float: left;
+}
+
+main .tracks .track-info > :first-child {
+    position: relative;
+    top: 3px;
+}
+main .tracks .track-info > :nth-child(2) {
+    font-size: 12px;
+    position: relative;
+    bottom: 2px;
+}
+
+a.play-button {
+    background-image: url(icons.png);
+    width: 40px;
+    height: 40px !important;
+    float: left;
+    cursor: pointer;
+    transition: 0.2s linear;
+    opacity: 0.3;
+    margin-right: 4px;
+    position: relative;
+    top: 50%;
+    margin-top: -20px;
+}
+
+a.play-button:hover { opacity: 1; }
+
+.tracks .album-cover img {
+    height: 40px;
+}
+
+.tracks li > span.order {
+    display: block;
+    float: left;
+    width: 25px;
+    height: 100%;
+    line-height: 38px;
+    padding-left: 8px;
+    padding-right: 8px;
+    text-align: right;
+}
+.remove-playlist-link {
+    color: #859191;
+    position: relative;
+    top: -10px;
+    left: 1px;
+    font-size: 13px;
+}
+
+.album-info {
+    margin-bottom: 10px;
+    overflow: hidden;
+    color: #ddd;
+}
+.album-info h3 { clear: none; }
+.album-info h4 a { color: #ccc; }

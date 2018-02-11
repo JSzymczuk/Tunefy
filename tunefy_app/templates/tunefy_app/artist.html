@@ -1,66 +1,66 @@
 
 {% if artist %}
 
-    <h1>{{ artist.name }}</h1>
-
-    {% if artist.image %}
-        <a href="{{ artist.image.url }}">
-            <img src="{{ artist.thumb.url }}" alt="{{ artist.name }}">
-        </a>
-    {% endif %}
+    <div class="album-info">
+        {% if artist.image %}
+            <a href="{{ artist.image.url }}" class="album-cover view-image-link">
+                <img src="{{ artist.thumb.url }}" alt="{{ artist.name }}">
+            </a>
+        {% endif %}
+        <h3>{{ artist.name }}</h3>
+    </div>
 
     {% if artist.description %}
-        <h2>Biografia:</h2>
-        <div>{{ artist.description }}</div>
+        <h2>Biografia</h2>
+        <p>{{ artist.description }}</p>
     {% endif %}
 
     {% if tracks %}
-        <h2>Popularne utwory:</h2>
-        <ol>
+        <h2>Popularne utwory</h2>
+        <ol class="tracks">
             {% for track in tracks %}
                 <li>
-                    <div>
-                        {% if track.album.image %}
-                            <a href="{% url 'album' track.album.id %}">
-                                <img src="{{ track.album.thumb.url }}" alt="{{ track.album.name }}">
-                            </a>
-                        {% endif %}
+                    <a href="{% url 'track.play' track.id %}" class="play-button"></a>
+                    {% if track.album.image %}
+                        <a href="{% url 'album' track.album.id %}" class="album-cover">
+                            <img src="{{ track.album.thumb.url }}" alt="{{ track.album.name }}">
+                        </a>
+                    {% endif %}
+                    <div class="track-info">
+                        <a href="{% url 'album' track.album.id %}">{{ track.song.title }}</a>
+                        <div class="artists">
+                            {% for artist in track.song.artists.all %}
+                                <a href="{% url 'artist' artist.id %}">{{ artist }}</a>{% if forloop.counter < track.song.artists.all|length %}, {% endif %}
+                            {% endfor %} - <a href="{% url 'album' track.album.id %}">{{ track.album.name }}</a>
+                        </div>
                     </div>
-                    <div>
-                        {{ track.song.title }}
-                        {% if track.song.artists.all|length > 1 %}
-                            ( ft.
-                            {% for a in track.song.artists.all %}
-                                {% if a != artist %}
-                                    <a href="{% url 'artist' a.id %}">{{ a }}</a>
-                                {% endif %}
-                            {% endfor %}
-                            )
-                        {% endif %}
-                    </div>
-                    <div>{{ track.popularity }}</div>
-                    <a href="{% url 'playlist.add_element' track.id %}">A</a>
+                    <a href="{% url 'playlist.add_element' track.id %}" class="add-button"></a>
                 </li>
             {% endfor %}
         </ol>
     {% endif %}
 
     {% if albums %}
-        <h2>Albumy:</h2>
-        <ol>
+        <h3>Albumy</h3>
+        <ol class="albums">
         {% for album in albums %}
             <li>
+                <a href="{% url 'track.play' 0 album.id %}" class="play-button"></a>
                 {% if album.image %}
-                    <a href="{% url 'album' album.id %}">
+                    <a href="{% url 'album' album.id %}" class="album-cover">
                         <img src="{{ album.thumb.url }}" alt="{{ album.name }}">
                     </a>
                 {% endif %}
-                <a href="{% url 'album' album.id %}">{{ album.name }}</a>
-                {{ album.date_released|date:'Y' }}
+                <div>
+                    <a href="{% url 'album' album.id %}">{{ album.name }}</a>
+                    <div>{{ album.date_released|date:'Y' }}</div>
+                </div>
             </li>
         {% endfor %}
         </ol>
     {% endif %}
+
+
 
 {% else %}
     <h3>Nie znaleziono wykonawcy</h3>

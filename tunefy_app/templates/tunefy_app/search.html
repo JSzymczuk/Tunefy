@@ -1,50 +1,57 @@
 
 {% if artists %}
-    <h2>Wykonawcy:</h2>
-    <ol>
+    <h3>Wykonawcy:</h3>
+    <ol class="artists">
         {% for artist in artists %}
             <li>
                 {% if artist.image %}
-                    <a href="{% url 'artist' artist.id %}">
-                        <img src="{{ artist.thumb.url }}" alt="{{ artist.name }}">
-                    </a>
+                    <img src="{{ artist.thumb.url }}" alt="{{ artist.name }}">
                 {% endif %}
-            <a href="{% url 'artist' artist.id %}">{{ artist.name }}</a>
+                <h5>{{ artist.name }}</h5>
+                <a href="{% url 'artist' artist.id %}"></a>
             </li>
         {% endfor %}
     </ol>
 {% endif %}
 
 {% if albums %}
-    <h2>Albumy:</h2>
-    <ol>
+    <h3>Albumy:</h3>
+    <ol class="albums">
     {% for album in albums %}
         <li>
+            <a href="{% url 'track.play' 0 album.id %}" class="play-button"></a>
             {% if album.image %}
-                <a href="{% url 'album' album.id %}">
+                <a href="{% url 'album' album.id %}" class="album-cover">
                     <img src="{{ album.thumb.url }}" alt="{{ album.name }}">
                 </a>
             {% endif %}
-            <a href="{% url 'album' album.id %}">{{ album.name }}</a>
-            {{ album.date_released|date:'Y' }}
+            <div>
+                <a href="{% url 'album' album.id %}">{{ album.name }}</a>
+                <div class="artists">
+                    <a href="{% url 'artist' album.artist.id %}">{{ album.artist }}</a>
+                </div>
+                {{ album.date_released|date:'Y' }}
+            </div>
         </li>
     {% endfor %}
     </ol>
 {% endif %}
 
 {% if tracks %}
-    <h2>Utwory:</h2>
-    <ol>
+    <h3>Utwory:</h3>
+    <ol class="tracks">
         {% for track in tracks %}
             <li>
-                {{ track.song.title }}
-                <div>
-                    {% for artist in track.song.artists.all %}
-                        <a href="{% url 'artist' artist.id %}">{{ artist }}</a>
-                    {% endfor %}
+                <a href="{% url 'track.play' track.id %}" class="play-button"></a>
+                <div class="track-info">
+                    <a href="{% url 'album' track.album.id %}">{{ track.song.title }}</a>
+                    <div class="artists">
+                        {% for artist in track.song.artists.all %}
+                            <a href="{% url 'artist' artist.id %}">{{ artist }}</a>{% if forloop.counter < track.song.artists.all|length %}, {% endif %}
+                        {% endfor %} - <a href="{% url 'album' track.album.id %}">{{ track.album.name }}</a>
+                    </div>
                 </div>
-                <a href="{% url 'album' track.album.id %}">{{ track.album.name }}</a>
-                <a href="{% url 'playlist.add_element' track.id %}">A</a>
+                <a href="{% url 'playlist.add_element' track.id %}" class="add-button"></a>
             </li>
         {% endfor %}
     </ol>

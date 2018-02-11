@@ -1,26 +1,28 @@
 {% if playlist %}
 
     <h2>{{ playlist.name }}</h2>
+    <a href="{% url 'playlist.delete' playlist.id %}" class="remove-playlist-link">Usuń playlistę</a>
 
     {% if elements %}
-        <ol>
+        <ol class="tracks">
             {% for element in elements %}
                 <li>
-                    {{ element.order }}
-                    <div>
-                        {% if element.track.album.image %}
-                            <a href="{% url 'album' element.track.album.id %}">
-                                <img src="{{ element.track.album.thumb.url }}" alt="{{ element.track.album.name }}">
-                            </a>
-                        {% endif %}
+                    <span class="order">{{ element.order|add:1 }}</span>
+                    <a href="{% url 'track.play' element.track.id playlist.id %}" class="play-button"></a>
+                    {% if element.track.album.image %}
+                        <a href="{% url 'album' element.track.album.id %}" class="album-cover">
+                            <img src="{{ element.track.album.thumb.url }}" alt="{{ element.track.album.name }}">
+                        </a>
+                    {% endif %}
+                    <div class="track-info">
+                        <a href="{% url 'album' element.track.album.id %}">{{ element.track.song.title }}</a>
+                        <div class="artists">
+                            {% for artist in element.track.song.artists.all %}
+                                <a href="{% url 'artist' artist.id %}">{{ artist }}</a>{% if forloop.counter < element.track.song.artists.all|length %}, {% endif %}
+                            {% endfor %} - <a href="{% url 'album' element.track.album.id %}">{{ element.track.album.name }}</a>
+                        </div>
                     </div>
-                    <div>
-                        {{ element.track.song.title }}
-                        {% for artist in element.track.song.artists.all %}
-                            <a href="{% url 'artist' artist.id %}">{{ artist }}</a>
-                        {% endfor %}
-                    </div>
-                    <a href="{% url 'playlist.remove_element' element.id %}">D</a>
+                    <a href="{% url 'playlist.remove_element' element.id %}" class="remove-button"></a>
                 </li>
             {% endfor %}
         </ol>

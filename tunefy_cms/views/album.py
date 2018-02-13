@@ -77,7 +77,6 @@ def edit(request, id):
     })
 
 
-@staff_member_required
 def remove_image(album):
     remove_field_file(album.image)
     remove_field_file(album.thumb)

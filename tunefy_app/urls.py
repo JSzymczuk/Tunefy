@@ -13,8 +13,10 @@ urlpatterns = [
     path('playlist/<id>/',                 views.get_playlist,     name='playlist.index'          ),
     path('playlist/',                      views.get_playlists,    name='playlist.index'          ),
 
-    path('account/',          include('django.contrib.auth.urls')),
-    path('account/register/', views.register, name='register'    ),
+    path('account/',           views.sign_in,    name='sign_in'       ),
+    path('account/login/',     views.sign_in,    name='sign_in'       ),
+    path('account/logout/',    views.sign_out,   name='sign_out'      ),
+    path('account/register/',  views.register,   name='register'      ),
 
     path('play/playlist/<playlist_id>/<element_id>/', views.play_playlist, name='playlist.play' ),
     path('play/playlist/<playlist_id>/',              views.play_playlist, name='playlist.play' ),

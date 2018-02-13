@@ -1,7 +1,6 @@
-from django.core.exceptions import ValidationError
-from django.forms import ModelForm, ModelChoiceField, Textarea
+from django.forms import ModelForm, Textarea
 from tunefy_cms.models import Artist, Song, Genre, Album, Playlist
-from tunefy_cms.validators import is_empty, is_max_length_exceeded, ValidationMessages
+from tunefy_cms.validators import validate_text_field, validate_file, validate_selection_box
 
 
 class GenreForm(ModelForm):
@@ -12,20 +11,8 @@ class GenreForm(ModelForm):
             'name': 'Nazwa'
         }
 
-    def clean(self):
-        cleaned_data = super(GenreForm, self).clean()
-
-        if is_empty(cleaned_data.get('name')):
-            self.add_error('name', ValidationMessages.FIELD_IS_REQUIRED)
-        else:
-            max_lth = self.fields.get('name').max_length
-            if is_max_length_exceeded(cleaned_data.get('name'), max_lth):
-                self.add_error('name', ValidationMessages.MAX_LENGTH_EXCEEDED % (self.fields.get('name').name, max_lth))
-
-        if not self.errors.items:
-            raise ValidationError()
-
-        return cleaned_data
+    def clean_name(self):
+        return validate_text_field(self, 'name', True, 30)
 
 
 class ThumbModelForm(ModelForm):
@@ -46,6 +33,12 @@ class CreateArtistForm(ThumbModelForm):
             'description': Textarea(attrs={'cols': 80, 'rows': 20}),
         }
 
+    def clean_name(self):
+        return validate_text_field(self, 'name', True, 50)
+
+    def clean_image(self):
+        return validate_file(self, 'image', False, ['.jpg', '.jpeg', '.png'])
+
 
 class CreateSongForm(ModelForm):
     class Meta:
@@ -53,8 +46,17 @@ class CreateSongForm(ModelForm):
         fields = ['title', 'artists', 'audio']
 
     def __init__(self, *args, **kwargs):
-         super(CreateSongForm, self).__init__(*args, **kwargs)
-         #self.fields['artist'].empty_label = 'None'
+        super(CreateSongForm, self).__init__(*args, **kwargs)
+        # self.fields['artist'].empty_label = 'None'
+
+    def clean_title(self):
+        return validate_text_field(self, 'title', True, 64)
+
+    def clean_audio(self):
+        return validate_file(self, 'audio', False, ['.mp3', '.wav'])
+
+    def clean_artists(self):
+        return validate_selection_box(self, 'artists')
 
 
 class CreateAlbumForm(ThumbModelForm):
@@ -67,3 +69,9 @@ class CreateAlbumForm(ThumbModelForm):
     def __init__(self, initial_tracks, *args, **kwargs):
         super(CreateAlbumForm, self).__init__(*args, **kwargs)
         self.initial_tracks = initial_tracks
+
+    def clean_name(self):
+        return validate_text_field(self, 'name', True, 64)
+
+    def clean_image(self):
+        return validate_file(self, 'image', False, ['.jpg', '.jpeg', '.png'])

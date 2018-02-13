@@ -10,20 +10,17 @@
         <div class='welcome-panel'>
             <div class='logo'></div>
 
-            <form id="login-form" method="post">
+            <form id="login-form" method="post" action="{% url 'sign_in' %}">
 
                 {% csrf_token %}
                 <h2>Logowanie</h2>
 
-                <div class='form-field-area'>
-                    <div class='error'>Podana nazwa użytkownika jest już zajęta.</div>
-                    <input type='text' name='username' placeholder='Nazwa użytkownika'>
-                </div>
-
-                <div class='form-field-area'>
-                    <div class='error'>Podane hasło jest nieprawidłowe.</div>
-                    <input type='password' name='password' placeholder='Hasło'>
-                </div>
+                {% for field in form.visible_fields %}
+                    <div class='form-field-area'>
+                        <div class='error'>{{ field.errors }}</div>
+                        {{ field }}
+                    </div>
+                {% endfor %}
 
                 <button type='submit'>Zaloguj się</button>
 

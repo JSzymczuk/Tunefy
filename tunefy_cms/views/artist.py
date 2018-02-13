@@ -33,13 +33,13 @@ def create(request):
 def edit(request, id):
     artist = Artist.objects.get(pk = id)
     if request.method == 'POST':
-        form = CreateArtistForm(request.POST, request.FILES, instance = artist)
+        form = CreateArtistForm(request.POST, request.FILES, instance=artist)
         if form.is_valid():
             edit_image_thumb(form)
             form.save()
             return redirect('artist.index')
     else:
-        form = CreateArtistForm(instance = artist)
+        form = CreateArtistForm(instance=artist)
     return render(request, 'tunefy_cms/artist/edit.html', {
         'form': form,
         'artist_id': id
@@ -48,13 +48,12 @@ def edit(request, id):
 
 @staff_member_required
 def delete(request, id):
-    artist = Artist.objects.filter(id = id)
+    artist = Artist.objects.filter(id=id)
     remove_image(artist.first())
     artist.delete()
     return redirect('artist.index')
 
 
-@staff_member_required
 def remove_image(artist):
     remove_field_file(artist.image)
     remove_field_file(artist.thumb)

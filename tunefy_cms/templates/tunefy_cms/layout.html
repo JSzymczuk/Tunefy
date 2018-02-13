@@ -20,7 +20,7 @@
                 {% if user.is_authenticated %}
                     <li class="right">
                         Witaj, {{ user.username }}
-                        <a href="{% url 'logout' %}">Wyloguj się</a>
+                        <a href="{% url 'sign_out' %}">Wyloguj się</a>
                     </li>
                 {% endif %}
             </ul>

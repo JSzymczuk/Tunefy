@@ -1,12 +1,14 @@
 from math import floor
 
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.http import Http404, HttpResponse, HttpResponseRedirect
-from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.urls import reverse
+
+from tunefy_app.forms import RegistrationForm, LoginForm
 from tunefy_cms.models import Song, Track, Artist, Album, Playlist, PlaylistElement
 from mutagen.mp3 import MP3
 
@@ -279,17 +281,40 @@ def set_volume(request, volume):
     return response
 
 
+def sign_in(request):
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return redirect('index')
+    else:
+        form = LoginForm()
+    return render(request, 'registration/login.html', {
+        'form': form
+    })
+
+
+@login_required(redirect_field_name=None)
+def sign_out(request):
+    logout(request)
+    return redirect('index')
+
+
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST, request.FILES)
+        form = RegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
-            new_user = authenticate(username=form.cleaned_data['username'],
-                                    password=form.cleaned_data['password1'])
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            User.objects.create_user(username, password=password)
+            new_user = authenticate(username=username, password=password)
             login(request, new_user)
             return redirect('index')
     else:
-        form = UserCreationForm()
+        form = RegistrationForm()
     return render(request, 'registration/register.html', {
         'form': form
     })

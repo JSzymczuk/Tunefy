@@ -9,7 +9,7 @@ import datetime
 
 
 class Genre(Model):
-    name = CharField(max_length=32, blank=True)
+    name = CharField(max_length=30, blank=True)
 
     def __str__(self):
         return self.name
@@ -34,7 +34,7 @@ class ImageThumbModel(Model):
 
 
 class Artist(ImageThumbModel):
-    name = CharField(max_length=50)
+    name = CharField(max_length=50, blank=True)
     description = CharField(max_length=1024, blank=True)
     image = ImageField(upload_to=path_and_rename('artists'), blank=True)
     thumb = ImageField(upload_to=path_and_rename('artists/thumbs'), null=True, blank=True)
@@ -47,7 +47,7 @@ class Artist(ImageThumbModel):
 
 
 class Song(Model):
-    title = CharField(max_length=64)
+    title = CharField(max_length=64, blank=True)
     artists = ManyToManyField(Artist, blank=True, related_name='artists+')
     audio = FileField(upload_to=path_and_rename('songs'), blank=True)
     #audio = FileField(blank=True)
@@ -71,7 +71,7 @@ class Track(Model):
 
 
 class Album(ImageThumbModel):
-    name = CharField(max_length=64)
+    name = CharField(max_length=64, blank=True)
     artist = ForeignKey(Artist, on_delete=CASCADE)
     date_released = DateField('Date', default=datetime.date.today)
     genres = ManyToManyField('Genre', blank=True, related_name='genres+')

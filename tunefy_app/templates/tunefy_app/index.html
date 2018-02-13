@@ -36,9 +36,9 @@
                         {% if user.is_staff %}
                             <a href="{% url 'cms' %}">Panel administracyjny</a>
                         {% endif %}
-                        <a href="{% url 'logout' %}">Wyloguj się</a>
+                        <a href="{% url 'sign_out' %}">Wyloguj się</a>
                     {% else %}
-                        Nie jesteś zalogowany. <a href="{% url 'login' %}">Zaloguj się</a>
+                        Nie jesteś zalogowany. <a href="{% url 'sign_in' %}">Zaloguj się</a>
                     {% endif %}
                 </p>
             </div>

@@ -206,6 +206,8 @@ input[type=text], input[type=password], input[type=number] {
     letter-spacing: 1px;
 }
 
+.error ul { list-style: none; }
+
 /*************************************/
 /* scrollbar                         */
 /*************************************/

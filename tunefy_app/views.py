@@ -1,5 +1,4 @@
 from math import floor
-
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -7,10 +6,33 @@ from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.urls import reverse
-
 from tunefy_app.forms import RegistrationForm, LoginForm
 from tunefy_cms.models import Song, Track, Artist, Album, Playlist, PlaylistElement
 from mutagen.mp3 import MP3
+
+
+# def add_to_history(response, url):
+#     history = response.COOKIES.get('history')
+#     if history is not None:
+#         response.COOKIES.set('history', history + ";" + url)
+#     else:
+#         response.COOKIES.set(history, url)
+#     return response
+#
+#
+# def previous(request):
+#     history = request.COOKIES.get('history')
+#     if history is not None:
+#         history = history.split(';')
+#         lth = len(history)
+#         if lth > 0
+#             url = history[lth - 1]
+#             history = ';'.join(history)
+#         else:
+#             url = 'index.html'
+#     else:
+#         url =
+#     return response
 
 
 @login_required(redirect_field_name=None)

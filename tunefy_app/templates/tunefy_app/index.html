@@ -195,16 +195,18 @@
         });
 
         function playTrack(callback) {
-            var promise = $('#player-audio').get(0).play();
+            var player = $('#player-audio').get(0);
+            var promise = player.play();
 
             promise.then(function () {
                 $('#track-buffering').hide();
                 if (callback && typeof callback === "function") {
                     callback();
                 }
-            }).catch(function () {
-                console.log("Play interrupted on user's request.");
             });
+{#            .catch(function () {#}
+{#                console.log("Play interrupted on user's request.");#}
+{#            })#}
 
             $('#play-button').attr('playing', '');
         }
@@ -222,11 +224,12 @@
         }
 
         function updateTime() {
-            var currentTime = Math.floor(this.currentTime);
+            var player = $('#player-audio').get(0);
+            var currentTime = Math.floor(player.currentTime);
             var seconds = currentTime % 60;
             var str = Math.floor(currentTime / 60) + ':' + (seconds < 10 ? '0' + seconds : seconds);
             $('#current-time-value').text(str);
-            $('#current-time-bar').css('width', (Math.min(100, 100 * currentTime / this.duration)) + '%');
+            $('#current-time-bar').css('width', (Math.min(100, 100 * currentTime / player.duration)) + '%');
         }
 
         function setVolume(volume) {

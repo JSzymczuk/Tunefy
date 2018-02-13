@@ -50,21 +50,22 @@
             player.bind('ended', stopTrack);
             playTrack();
             setVolume({{ volume }});
+        });
 
-            $(document).on('click', '.time-bar', function (e) {
-                var progress = (e.pageX - $(this).offset().left) / $(this).width();
-                var player = $('#player-audio').get(0);
-                var currentTime = parseFloat(Math.max(0, Math.min(1, progress)) * player.duration);
-                playTrack(function() {
-                    //player.play().then(function () {
-                        player.currentTime = currentTime;
-                    //});
-                });
+        $(document).on('click', '.time-bar', function (e) {
+            var progress = (e.pageX - $(this).offset().left) / $(this).width();
+            var player = $('#player-audio').get(0);
+            var currentTime = parseFloat(Math.max(0, Math.min(1, progress)) * player.duration);
+            playTrack(function() {
+                console.log(player.currentTime);
+                console.log(currentTime);
+                player.currentTime = currentTime;
+                console.log(player.currentTime);
             });
+        });
 
-            $('.volume-bar').on('click', function (e) {
-                setVolume((e.pageX - $(this).offset().left) / $(this).width());
-            });
+        $('.volume-bar').on('click', function (e) {
+            setVolume((e.pageX - $(this).offset().left) / $(this).width());
         });
     </script>
 {% endif %}

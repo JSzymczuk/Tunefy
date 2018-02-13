@@ -1,11 +1,31 @@
-from django.forms import ModelForm, ModelChoiceField
+from django.core.exceptions import ValidationError
+from django.forms import ModelForm, ModelChoiceField, Textarea
 from tunefy_cms.models import Artist, Song, Genre, Album, Playlist
+from tunefy_cms.validators import is_empty, is_max_length_exceeded, ValidationMessages
 
 
 class GenreForm(ModelForm):
     class Meta:
         model = Genre
         fields = ['name']
+        labels = {
+            'name': 'Nazwa'
+        }
+
+    def clean(self):
+        cleaned_data = super(GenreForm, self).clean()
+
+        if is_empty(cleaned_data.get('name')):
+            self.add_error('name', ValidationMessages.FIELD_IS_REQUIRED)
+        else:
+            max_lth = self.fields.get('name').max_length
+            if is_max_length_exceeded(cleaned_data.get('name'), max_lth):
+                self.add_error('name', ValidationMessages.MAX_LENGTH_EXCEEDED % (self.fields.get('name').name, max_lth))
+
+        if not self.errors.items:
+            raise ValidationError()
+
+        return cleaned_data
 
 
 class ThumbModelForm(ModelForm):
@@ -22,6 +42,9 @@ class CreateArtistForm(ThumbModelForm):
     class Meta:
         model = Artist
         fields = ['name', 'image', 'description']
+        widgets = {
+            'description': Textarea(attrs={'cols': 80, 'rows': 20}),
+        }
 
 
 class CreateSongForm(ModelForm):

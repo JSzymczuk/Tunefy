@@ -1,0 +1,476 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+/* Ustawienia czcionek */
+
+nav, main, footer {
+    font-family: 'Montserrat', sans-serif;
+}
+
+a {
+	text-decoration: none;
+	color: rgb(64, 128, 128);
+	transition: 0.2s linear;
+}
+a:hover { text-decoration: underline; }
+
+/* Stopka trzymająca się dołu strony */
+
+html, body {
+	height: 100%;
+}
+
+body {
+	background: #fff;
+}
+
+.body-content {
+    min-height: 100%;
+    position: relative;
+    margin-bottom: -61px;
+	overflow: hidden;
+}
+
+main {
+	display: block;
+	font-size: 14px;
+    color: #000;
+}
+main:before {
+    display: block;
+    content: '';
+    height: 70px;
+}
+main:after {
+    display: block;
+    content: '';
+    height: 61px;
+}
+main .wrapper {
+    padding-top: 15px;
+}
+
+
+footer {
+	position: relative;
+    width: 100%;
+    height: 60px;
+    background: #1a1a1a;
+    border-top: 1px solid #f8f5e4;
+    box-shadow: 0 0 50px rgba(0,0,0,0.2);
+}
+
+.logo {
+    background: url(tunefy-logo-small.png) no-repeat center;
+    background-size: 160px;
+    height: 70px;
+    width: 140px;
+}
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    background-color: rgb(32,32,32);
+    color: #fff;
+    z-index: 99;
+}
+nav ul {
+	list-style: none;
+    display: inline-block;
+    height: 100%;
+}
+nav ul li {
+    display: block;
+    float: left;
+    height: 100%;
+    line-height: 70px;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+nav a {
+    color: #fff;
+    display: inline-block;
+    padding: 0 15px;
+}
+nav a:hover {
+	background-color: rgb(64, 128, 128);
+    text-decoration: none;
+}
+nav li:first-child a {
+    padding: 0;
+    background-color: transparent;
+}
+nav li:last-child a {
+    padding: 0 0 0 10px;
+    background-color: transparent;
+}
+nav li:last-child a:hover { text-decoration: underline; }
+
+
+
+.global-wrapper {
+	width: 980px;
+    position: relative;
+    left: 50%;
+    margin-left: -490px;
+    background-color: #f8f5e4;
+}
+
+.wrapper {
+	position: relative;
+	display: block;
+	height: 100%;
+	width: 980px;
+	margin: 0 auto;
+}
+
+.left  { float: left; }
+.right { float: right; }
+
+.copyright {
+    text-align: center;
+    position: relative;
+    top: 14px;
+    color: #fff;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 1px;
+}
+
+
+
+table {
+    margin: 10px 0;
+    width: 100%;
+    border-spacing: 0;
+}
+table tfoot td, table thead th {
+    background-color: rgb(32,32,32) !important;
+    color: #fff;
+    height: 32px;
+    padding: 4px 8px;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+table tfoot td a, table thead th a { color: #fff; }
+table td {
+    color: #000;
+    text-align: center;
+    height: 28px;
+    vertical-align: middle;
+    padding: 4px 8px;
+}
+table img { display: block; }
+table tbody { background-color: rgb(192, 192, 192); }
+table tr:nth-child(2n+1) td { background-color: rgba(255, 255, 255,  0.8); }
+table tr:nth-child(2n)   td { background-color: rgba(255, 255, 255, 0.65); }
+
+
+
+.pagination {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+}
+.pagination a { margin: 0 2px; }
+.pagination a:hover { text-decoration: underline; }
+.pagination .current {
+    position: absolute;
+    width: 150px;
+    margin-left: -75px;
+    left: 50%;
+}
+.pagination .left, .pagination .right { width: 200px; }
+
+
+
+.align-left  { text-align: left  !important; }
+.align-right { text-align: right !important; }
+.min44px  { min-width: 44px; }
+.min130px { min-width: 130px; }
+.width30 { width: 30px; }
+.width160 { width: 160px; }
+.no-padding { padding: 0; }
+
+
+
+h1 {
+    margin-bottom: 16px;
+}
+
+.execution-progress {
+    width: 380px;
+    height:200px;
+    margin: 0 auto;
+}
+
+.execution-progress > :first-child {
+    border: 10px solid #eccd00;
+    border-radius: 50%;
+    border-top: 10px solid #1a1a1a;
+    width: 80px;
+    height: 80px;
+    animation: spin 1.25s linear infinite;
+    margin: 150px auto 70px;
+    box-shadow:
+		0 0 1px rgba(0,0,0,0.7),
+		inset 0 0 0.5px rgba(0,0,0,0.5);
+}
+
+.execution-progress h1 {
+    text-align: center;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
+.form {
+    width: 500px;
+    margin-top: 10px;
+    margin-bottom: 27px;
+    background-color: rgba(192,192,192,0.2);
+    position: relative;
+    padding-bottom: 1px;
+}
+.form .form-field {
+    position: relative;
+    padding: 6px 0;
+    overflow: hidden;
+    clear: both;
+}
+.form .form-field > div,
+.form .errorlist  {
+    position: relative;
+    left: 190px;
+    width: 310px;
+    overflow: hidden;
+}
+.form label {
+    display: block;
+    position: absolute;
+    float: left;
+    width: 180px;
+    line-height: 36px;
+    text-align: right;
+    color: #333;
+    font-weight: 600;
+}
+.form input,
+.form textarea
+{
+    display: block;
+    border-radius: 0;
+}
+.form .errorlist {
+    width: 302px;
+    padding: 6px 0 8px;
+    color: #a00;
+    letter-spacing: 0.5px;
+    list-style: none;
+    font-size: 11px;
+}
+.form input,
+.form textarea {
+    width: 273px;
+    height: 21px;
+    padding: 6px 15px;
+    border: 1px solid #333;
+    background: #fff;
+    color: #333;
+    letter-spacing: 1px;
+    outline: none;
+}
+.form textarea {
+    height: 220px;
+    overflow-y: initial;
+    resize: none;
+    letter-spacing: 0;
+}
+.form input[type=submit],
+.song-list button {
+    left: 0;
+    margin: 20px auto 10px;
+    width: 200px;
+    height: 37px;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 37px;
+    padding: 0;
+    letter-spacing: 1.5px;
+    border: 0;
+    background-color: #405050;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+.form input[type=submit]:hover,
+.song-list button:hover {
+    background-color: #608080;
+}
+.form .cancel-link {
+    right: 0;
+    position: absolute;
+    margin-top: 6px;
+}
+
+
+.form input[type=checkbox] {
+    -webkit-appearance: none;
+    display: block;
+    padding: 0;
+    top: 5px;
+    cursor: pointer;
+    border-radius: 2px;
+    width: 21px;
+    position: relative;
+}
+.form input:checked:after {
+    position: absolute;
+    top: -3px;
+    left: 2px;
+    content: '\2714';
+    font-size: 18px;
+    color: #333;
+}
+.form select {
+    width: 305px;
+    height: 33px;
+    padding: 6px 15px;
+    border: 1px solid #333;
+    background: #fff;
+    color: #333;
+    letter-spacing: 1px;
+    outline: none;
+}
+.form select[multiple=multiple] {
+    padding: 0;
+    height: 113px;
+}
+.form select[multiple=multiple] option {
+    padding: 6px 15px;
+}
+
+.song-list select {
+    width: 272px;
+    float: left;
+}
+.song-list button {
+    width: 33px;
+    height: 33px;
+    float: left;
+    font-size: 30px;
+    margin: 0;
+    line-height: 0;
+}
+
+/* Kombinowane dostosowanie pola przesyłania pliku w trakcie edycji */
+.form .form-field > div {
+    color: transparent;
+    line-height: 0;
+}
+.form .form-field > div > a {
+    display: block;
+    line-height: 21px;
+    margin-top: 7px;
+}
+.form .form-field > div > input[type=checkbox] {
+    float: left;
+    margin-bottom: 16px;
+}
+.form .form-field > div > input[type=checkbox] + label {
+    display: inline-block;
+    float: left;
+    width: unset;
+    position: relative;
+    line-height: 32px;
+    font-weight: 300;
+    height: 21px;
+    margin-left: 10px;
+}
+.form .song-list > div {
+    line-height: 25px;
+    color: #333;
+}
+.form .song-list ol {
+    margin-top: 40px;
+    clear: both;
+    padding-left: 20px;
+}
+.form .song-list ol li {
+    height: 25px;
+    position: relative;
+    padding-right: 40px;
+    width: 245px;
+}
+.form .song-list ol li span:first-of-type  {
+    height: 25px;
+    overflow: hidden;
+    display: block;
+}
+.form .song-list ol li span:last-of-type  {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+.form .song-list ol a {
+    cursor: pointer;
+}
+.form .song-list ol a:hover {
+    text-decoration: none;
+}
+
+/*.form h2 {*/
+    /*color: rgb(64,64,64);*/
+    /*padding-bottom: 16px;*/
+    /*border-bottom: 1px solid rgba(64,64,64,0.3);*/
+    /*margin-bottom: 30px;*/
+/*}*/
+/*.form input[type=number] {*/
+    /*border-radius: 6px;*/
+    /*padding: 8px 14px;*/
+    /*border: 1px solid rgb(128,128,128);*/
+    /*width: 44px;*/
+    /*color: rgb(96,96,96);*/
+    /*text-align: right;*/
+    /*right: 0;*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*outline: none;*/
+/*}*/
+
+/*.form button {*/
+    /*width: 192px;*/
+    /*padding: 13px 0;*/
+    /*border-radius: 8px;*/
+    /*display: block;*/
+    /*margin: 40px auto 0;*/
+    /*color: #f8f5e4;*/
+    /*font-size: 15px;*/
+    /*cursor: pointer;*/
+    /*background-color: rgba(64,64,64,1);*/
+    /*text-transform: uppercase;*/
+    /*letter-spacing: 2px;*/
+    /*border: 1px solid rgba(64,64,64,0.3);*/
+    /*transition: 0.2s linear;*/
+    /*outline: none;*/
+/*}*/
+
+/*.form button:hover {*/
+    /*color: rgb(64,64,64);*/
+    /*background-color: rgba(236,205,0,1);*/
+/*}*/
+
+/*.form input[type=number]::-webkit-inner-spin-button {*/
+    /*-webkit-appearance: none;*/
+    /*margin: 0;*/
+/*}*/

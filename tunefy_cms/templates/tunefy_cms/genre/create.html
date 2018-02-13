@@ -1,1 +1,15 @@
-{% include "tunefy_cms/create_edit_form_base.html" with form=form title='Dodaj gatunek' form_confirm_action='genre.create' form_cancel_action='genre.index' form_confirm_text='Dodaj' form_cancel_text='Anuluj' %}
+{% extends "tunefy_cms/create_edit_form_base.html" %}
+
+{% block form %}{{ form }}{% endblock %}
+{% block title %}Dodaj gatunek{% endblock %}
+
+{% block form_confirm_text %}Dodaj{% endblock %}
+{% block form_cancel_text %}Anuluj{% endblock %}
+
+{% block form_confirm_action %}
+    {% url "genre.create" %}
+{% endblock %}
+
+{% block form_cancel_action %}
+    {% url "genre.index" %}
+{% endblock %}

@@ -1,1 +1,15 @@
-{% include "tunefy_cms/create_edit_form_base.html" with form=form id=artist_id title='Edytuj wykonawcę' form_confirm_action='artist.edit' form_cancel_action='artist.index' form_confirm_text='Zapisz zmiany' form_cancel_text='Anuluj' %}
+{% extends "tunefy_cms/create_edit_form_base.html" %}
+
+{% block form %}{{ form }}{% endblock %}
+{% block title %}Edytuj wykonawcę{% endblock %}
+
+{% block form_confirm_text %}Zapisz zmiany{% endblock %}
+{% block form_cancel_text %}Anuluj{% endblock %}
+
+{% block form_confirm_action %}
+    {% url "artist.edit" artist_id %}
+{% endblock %}
+
+{% block form_cancel_action %}
+    {% url "artist.index" %}
+{% endblock %}

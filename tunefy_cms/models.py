@@ -1,12 +1,15 @@
 from django.db.models import Model, CharField, ForeignKey, IntegerField, CASCADE, ManyToManyField, \
     PositiveSmallIntegerField, ImageField, FileField, DateField
+from django.forms import Textarea
+
+from tunefy_cms import validators
 from tunefy_cms.file_manager import create_thumb, path_and_rename, wrapper
 from django.contrib.auth.models import User
 import datetime
 
 
 class Genre(Model):
-    name = CharField(max_length=32)
+    name = CharField(max_length=32, blank=True)
 
     def __str__(self):
         return self.name
@@ -23,8 +26,8 @@ class ImageThumbModel(Model):
         abstract = True
 
     def save(self, *args, **kwargs):
-       create_thumb(self)
-       super(ImageThumbModel, self).save(*args, **kwargs)
+        create_thumb(self)
+        super(ImageThumbModel, self).save(*args, **kwargs)
 
     def __init__(self, *args, **kwargs):
         super(ImageThumbModel, self).__init__(*args, **kwargs)
@@ -91,4 +94,3 @@ class PlaylistElement(Model):
 class Playlist(Model):
     name = CharField(max_length=64)
     owner = ForeignKey(User, on_delete=CASCADE, null=True)
-#

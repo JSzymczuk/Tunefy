@@ -1,7 +1,7 @@
 from django.contrib.admin.views.decorators import staff_member_required
-from django.shortcuts import render
+from django.shortcuts import redirect
 
 
 @staff_member_required
 def index(request):
-    return render(request, 'tunefy_cms/home/index.html', {})
+    return redirect('song.index')

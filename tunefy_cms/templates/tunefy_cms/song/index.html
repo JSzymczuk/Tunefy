@@ -10,26 +10,41 @@
 
     {% if results %}
 
-        {% include 'tunefy_cms/pagination.html' with url_action='song.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
-
         <table>
+            <thead>
+                <tr>
+                    <th class="width30"></th>
+                    <th>Tytuł utworu</th>
+                    <th>Wykonawcy uczestniczący</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
             {% for song in results %}
                 <tr>
-                    <td>{{ first_index|add:forloop.counter }}</td>
-                    <td>{{ song.title }}</td>
-                    <td>
+                    <td class="align-right">{{ first_index|add:forloop.counter }}</td>
+                    <td class="align-left">{{ song.title }}</td>
+                    <td class="align-left">
                         {% for artist in song.artists.all %}
                             {% if forloop.counter > 1 %}, {% endif %}
                             <a href="{% url 'artist.edit' artist.id %}">{{ artist }}</a>
                         {% endfor %}
                     </td>
-                    <td><a href="{% url 'song.edit' song.id %}">Edytuj</a></td>
-                    <td><a href="{% url 'song.delete' song.id %}">Usuń</a></td>
+                    <td class="align-right">
+                        <a href="{% url 'song.edit' song.id %}">Edytuj</a>
+                        <a href="{% url 'song.delete' song.id %}">Usuń</a>
+                    </td>
                 </tr>
             {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                         {% include 'tunefy_cms/pagination.html' with url_action='song.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
+                    </td>
+                </tr>
+            </tfoot>
         </table>
-
-        {% include 'tunefy_cms/pagination.html' with url_action='song.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
 
     {% else %}
 

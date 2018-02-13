@@ -6,24 +6,38 @@
 
 {% block content %}
 
-    <a href="{% url 'genre.create' %}">Dodaj nowey gatunek</a>
+    <a href="{% url 'genre.create' %}">Dodaj nowy gatunek</a>
 
     {% if results %}
 
-        {% include 'tunefy_cms/pagination.html' with url_action='genre.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
-
         <table>
+            <thead>
+                <tr>
+                    <th class="width30"></th>
+                    <th class="align-left">Nazwa</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
             {% for genre in results %}
                 <tr>
-                    <td>{{ first_index|add:forloop.counter }}</td>
-                    <td>{{ genre.name }}</td>
-                    <td><a href="{% url 'genre.edit' genre.id %}">Edytuj</a></td>
-                    <td><a href="{% url 'genre.delete' genre.id %}">Usuń</a></td>
+                    <td class="align-right">{{ first_index|add:forloop.counter }}</td>
+                    <td class="align-left">{{ genre.name }}</td>
+                    <td class="align-right">
+                        <a href="{% url 'genre.edit' genre.id %}">Edytuj</a>
+                        <a href="{% url 'genre.delete' genre.id %}">Usuń</a>
+                    </td>
                 </tr>
             {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">
+                         {% include 'tunefy_cms/pagination.html' with url_action='genre.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
+                    </td>
+                </tr>
+            </tfoot>
         </table>
-
-        {% include 'tunefy_cms/pagination.html' with url_action='genre.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
 
     {% else %}
         <h2>Brak gatunków.</h2>

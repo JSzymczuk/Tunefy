@@ -1,19 +1,15 @@
-{% extends 'tunefy_cms/layout.html' %}
+{% extends "tunefy_cms/create_edit_form_base.html" %}
 
-{% block page_headline %}
-    <h2>{% block title %}Edytuj utwór{% endblock %}</h2>
+{% block form %}{{ form }}{% endblock %}
+{% block title %}Edytuj utwór{% endblock %}
+
+{% block form_confirm_text %}Zapisz zmiany{% endblock %}
+{% block form_cancel_text %}Anuluj{% endblock %}
+
+{% block form_confirm_action %}
+    {% url "song.edit" song_id %}
 {% endblock %}
 
-
-{% block content %}
-
-    <form action="{% url 'song.edit' song_id %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        {% include "tunefy_cms/form_field_set.html" with form=form %}
-
-        <input type="submit" value="Zapisz zmiany" />
-        <a href="{% url 'song.index' %}">Anuluj</a>
-    </form>
-
+{% block form_cancel_action %}
+    {% url "song.index" %}
 {% endblock %}

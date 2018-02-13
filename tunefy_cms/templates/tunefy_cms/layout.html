@@ -1,41 +1,43 @@
 <!doctype html>
 <html lang='pl'>
 <head>
-	{% load static %}
+    {% load staticfiles %}
 	<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
 	<title>{% block title %}{% endblock %} - Tunefy - The Best Tunes For You</title>
-	<!--<link rel='stylesheet' href="{% static 'tunefy_app/style.css' %}"/>-->
+	<link rel='stylesheet' href="{% static 'tunefy_cms/style.css' %}"/>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 	<div class='body-content'>
         <nav>
-            <a href="{% url 'genre.index' %}">Gatunki</a>
-            <a href="{% url 'artist.index' %}">Wykonawcy</a>
-            <a href="{% url 'song.index' %}">Utwory</a>
-            <a href="{% url 'album.index' %}">Albumy</a>
-            <a href="{% url 'user.index' %}">Użytkownicy</a>
+            <ul class="wrapper">
+                <li><a class="logo" href="{% url 'index' %}"></a> </li>
+                <li><a href="{% url 'genre.index' %}">Gatunki</a></li>
+                <li><a href="{% url 'artist.index' %}">Wykonawcy</a></li>
+                <li><a href="{% url 'song.index' %}">Utwory</a></li>
+                <li><a href="{% url 'album.index' %}">Albumy</a></li>
+                <li><a href="{% url 'user.index' %}">Użytkownicy</a></li>
+                {% if user.is_authenticated %}
+                    <li class="right">
+                        Witaj, {{ user.username }}
+                        <a href="{% url 'logout' %}">Wyloguj się</a>
+                    </li>
+                {% endif %}
+            </ul>
         </nav>
 
-        {% if user.is_authenticated %}
-            <p>Hi {{ user.username }}!</p>
-            <p><a href="{% url 'logout' %}">logout</a></p>
-        {% else %}
-            <p>You are not logged in.</p>
-            <a href="{% url 'login' %}">login</a>
-        {% endif %}
-
 		<main>
-            {% block page_headline %}{% endblock %}
-			{% block content %}{% endblock %}
+            <div class="wrapper">
+                {% block page_headline %}{% endblock %}
+                {% block content %}{% endblock %}
+            </div>
 		</main>
 	</div>
 
-	<footer>
+    <footer>
 		<div class='copyright'>
 			Systemy Zarządzania Treścią: Projekt zaliczeniowy<br>
-			Platforma ma charakter wyłącznie edukacyjny.<br>
-			&copy;2017 Jakub Szymczuk
+			&copy;2017 Jakub Szymczuk Platforma ma charakter wyłącznie edukacyjny.
 		</div>
 	</footer>
 

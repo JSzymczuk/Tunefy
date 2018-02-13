@@ -1,19 +1,15 @@
-{% extends 'tunefy_cms/layout.html' %}
+{% extends "tunefy_cms/create_edit_form_base.html" %}
 
-{% block page_headline %}
-    <h2>{% block title %}Dodaj utwór{% endblock %}</h2>
+{% block form %}{{ form }}{% endblock %}
+{% block title %}Dodaj utwór{% endblock %}
+
+{% block form_confirm_text %}Dodaj{% endblock %}
+{% block form_cancel_text %}Anuluj{% endblock %}
+
+{% block form_confirm_action %}
+    {% url "song.create" %}
 {% endblock %}
 
-
-{% block content %}
-
-    <form action="{% url 'song.create' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-
-        {% include "tunefy_cms/form_field_set.html" with form=form %}
-
-        <input type="submit" value="Dodaj" />
-        <a href="{% url 'song.index' %}">Anuluj</a>
-    </form>
-
+{% block form_cancel_action %}
+    {% url "song.index" %}
 {% endblock %}

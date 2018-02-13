@@ -10,29 +10,44 @@
 
     {% if results %}
 
-        {% include 'tunefy_cms/pagination.html' with url_action='artist.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
-
         <table>
+            <thead>
+                <tr>
+                    <th class="width30"></th>
+                    <th class="width160">Obraz</th>
+                    <th class="align-left">Nazwa</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
             {% for artist in results %}
 
                 <tr>
-                    <td>{{ first_index|add:forloop.counter }}</td>
-                    <td>{{ artist.name }}</td>
-                    <td>
+                    <td class="align-right">{{ first_index|add:forloop.counter }}</td>
+                    <td class="no-padding">
                         {% if artist.image %}
                             <a href="{{ artist.image.url }}">
                                 <img src="{{ artist.thumb.url }}" alt="{{ artist.name }}">
                             </a>
                         {% endif %}
                     </td>
-                    <td><a href="{% url 'artist.edit' artist.id %}">Edytuj</a></td>
-                    <td><a href="{% url 'artist.delete' artist.id %}">Usuń</a></td>
+                    <td class="align-left">{{ artist.name }}</td>
+                    <td class="align-right">
+                        <a href="{% url 'artist.edit' artist.id %}">Edytuj</a>
+                        <a href="{% url 'artist.delete' artist.id %}">Usuń</a>
+                    </td>
                 </tr>
 
             {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">
+                         {% include 'tunefy_cms/pagination.html' with url_action='artist.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
+                    </td>
+                </tr>
+            </tfoot>
         </table>
-
-        {% include 'tunefy_cms/pagination.html' with url_action='artist.index' page_size=page_size prev_page=prev_page current_page=current_page next_page=next_page total_pages=total_pages %}
 
     {% else %}
 
